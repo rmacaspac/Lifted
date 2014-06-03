@@ -10,4 +10,18 @@
 
 @implementation RMWorkout
 
+
+//+ (NSMutableArray *)addedWorkout:(NSArray *)exercises underWorkoutName:(NSString *)workoutName
+//{
+//    NSMutableArray *addedWorkout = [[NSMutableArray alloc] initWithObjects:workoutName, exercises, nil];
+//    
+//    return addedWorkout;
+//}
+//
+//+ (NSMutableDictionary *)workouts
+//{
+//    NSMutableArray *workoutObjects = [[NSMutableArray alloc] init];
+//    workoutObjects = [self added]
+//}
+
 @end

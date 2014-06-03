@@ -7,7 +7,25 @@
 //
 
 #import "RMWorkoutObject.h"
+#import "RMWorkout.h"
 
 @implementation RMWorkoutObject
+
+- (id)init
+{
+    self = [self initWithData:nil];
+    return self;
+}
+
+
+- (id)initWithData:(NSDictionary *)addedExercises
+{
+    self = [super init];
+    
+    self.workoutName = addedExercises[WORKOUT_NAME];
+    self.workoutExercises = addedExercises[WORKOUT_EXERCISES];
+    
+    return self;
+}
 
 @end

@@ -7,7 +7,19 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "RMWorkoutObject.h"
+
+@protocol RMAddWorkoutViewControllerDelegate <NSObject>
+
+- (void)didAddWorkout:(RMWorkoutObject *)workoutObject;
+
+@end
 
 @interface RMAddWorkoutViewController : UIViewController
+
+@property (weak, nonatomic) id <RMAddWorkoutViewControllerDelegate> delegate;
+
+
+
 
 @end

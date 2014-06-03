@@ -10,4 +10,8 @@
 
 @interface RMExercises : NSObject
 
+@property (strong, nonatomic) NSString *exerciseName;
+
++ (NSMutableArray *)exerciseList;
+
 @end

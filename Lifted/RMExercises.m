@@ -10,4 +10,20 @@
 
 @implementation RMExercises
 
++ (NSMutableArray *)exerciseList
+
+{
+    NSMutableArray *exercises = [[NSMutableArray alloc] init];
+    [exercises addObject:@"Barbell Bench Press"];
+    [exercises addObject:@"Barbell Incline Press"];
+    [exercises addObject:@"Barbell Decline Press"];
+    [exercises addObject:@"Dumbbell Bench Press"];
+    [exercises addObject:@"Dumbbell Incline Press"];
+    [exercises addObject:@"Dumbbell Decline Press"];
+    [exercises addObject:@"Dumbbell Flys"];
+    
+    return exercises;
+}
+
+
 @end

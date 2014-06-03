@@ -7,7 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "RMExercises.h"
+#import "RMWorkout.h"
+
+@protocol RMSelectExercisesViewControllerDelegate <NSObject>
+
+- (void)didSelectExercise:(NSMutableArray *)selectedExercise;
+
+@end
 
 @interface RMSelectExercisesViewController : UIViewController
+
+@property (weak, nonatomic) id <RMSelectExercisesViewControllerDelegate> delegate;
 
 @end

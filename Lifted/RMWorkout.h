@@ -10,4 +10,6 @@
 
 @interface RMWorkout : NSObject
 
+//+ (NSMutableArray *)addedExercises:(NSArray *)exercise underWorkoutName:(NSString *)workoutName;
+
 @end

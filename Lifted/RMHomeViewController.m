@@ -10,6 +10,7 @@
 
 @interface RMHomeViewController ()
 
+@property (strong, nonatomic) IBOutlet UIImageView *imageView;
 @end
 
 @implementation RMHomeViewController
@@ -34,6 +35,14 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+#pragma mark - IBActions
+
+- (IBAction)startWorkout:(UIButton *)sender
+{
+
+}
+
 
 /*
 #pragma mark - Navigation
