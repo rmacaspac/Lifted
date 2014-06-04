@@ -8,7 +8,6 @@
 
 #import <UIKit/UIKit.h>
 #import "RMExercises.h"
-#import "RMWorkout.h"
 
 @protocol RMSelectExercisesViewControllerDelegate <NSObject>
 

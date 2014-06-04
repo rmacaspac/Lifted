@@ -7,7 +7,7 @@
 //
 
 #import "RMWorkoutObject.h"
-#import "RMWorkout.h"
+
 
 @implementation RMWorkoutObject
 

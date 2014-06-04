@@ -8,14 +8,12 @@
 
 #import "RMAddWorkoutViewController.h"
 #import "RMExercises.h"
-#import "RMWorkout.h"
 #import "RMSelectExercisesViewController.h"
 
 @interface RMAddWorkoutViewController () <UITableViewDataSource, UITableViewDelegate, RMSelectExercisesViewControllerDelegate>
 
 @property (strong, nonatomic) NSMutableArray *exerciseList;
 @property (strong, nonatomic) RMExercises *exerciseSelected;
-@property (strong, nonatomic) RMWorkout *exerciseAddedToWorkout;
 
 @property (strong, nonatomic) IBOutlet UITextField *addWorkoutTextField;
 @property (strong, nonatomic) IBOutlet UITableView *exercisesTableView;
@@ -110,13 +108,13 @@
 
 - (IBAction)cancelButtonPressed:(UIButton *)sender
 {
-    [self dismissViewControllerAnimated:YES completion:nil];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (IBAction)finishButtonPressed:(UIButton *)sender
 {
     [self.delegate didAddWorkout:[self workoutWithExercises]];
-    [self dismissViewControllerAnimated:YES completion:nil];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (IBAction)addWorkoutButtonPressed:(UIButton *)sender

@@ -8,8 +8,9 @@
 
 #import "RMWorkoutsViewController.h"
 #import "RMAddWorkoutViewController.h"
-#import "RMWorkout.h"
 #import "RMWorkoutObject.h"
+#import "RMWorkoutRoutineViewController.h"
+
 
 @interface RMWorkoutsViewController () <UITableViewDataSource, UITableViewDelegate, RMAddWorkoutViewControllerDelegate>
 
@@ -17,6 +18,7 @@
 @property (strong, nonatomic) NSDictionary *workoutObjects;
 @property (strong, nonatomic) NSString *workoutName;
 @property (strong, nonatomic) RMWorkoutObject *workout;
+
 @property (strong, nonatomic) IBOutlet UITableView *workoutsTableView;
 
 @end
@@ -86,6 +88,17 @@
     return 2;
 }
 
+#pragma mark - UITableView Delegate
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.section == 0) {
+        [self performSegueWithIdentifier:@"workoutsToRoutineSegue" sender:indexPath];
+    } if (indexPath.section == 1) {
+        [self performSegueWithIdentifier:@"workoutsToAddWorkoutSegue" sender:indexPath];
+    }
+}
+
 
 #pragma mark - Navigation
 
@@ -95,6 +108,17 @@
         RMAddWorkoutViewController *addWorkoutVC = segue.destinationViewController;
         addWorkoutVC.delegate = self;
     }
+    
+    if ([sender isKindOfClass:[NSIndexPath class]]) {
+        if ([segue.identifier isEqualToString:@"workoutsToRoutineSegue"]) {
+            if ([segue.destinationViewController isKindOfClass:[RMWorkoutRoutineViewController class]]) {
+                RMWorkoutRoutineViewController *workoutRoutineVC = segue.destinationViewController;
+                NSIndexPath *indexPath = sender;
+                RMWorkoutObject *workoutObject = self.workoutExercises[indexPath.row];
+                workoutRoutineVC.workoutObject = workoutObject;
+            }
+        }
+    }
 }
 
 #pragma mark - UIAddWorkoutViewController Delegate
@@ -103,7 +127,7 @@
 {
     // Adding workoutObject from addWorkoutViewController to workoutObjects instance
     [self.workoutExercises addObject:[self workoutInfoAsPropertyLists:workoutObject]];
-
+    
     NSLog(@"new workout is %@", self.workoutExercises);
     [self.workoutsTableView reloadData];
 }
