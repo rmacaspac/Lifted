@@ -9,8 +9,9 @@
 #import "RMAddWorkoutViewController.h"
 #import "RMExerciseObject.h"
 #import "RMSelectExercisesViewController.h"
+#import "RMEditExerciseViewController.h"
 
-@interface RMAddWorkoutViewController () <UITableViewDataSource, UITableViewDelegate, RMSelectExercisesViewControllerDelegate, UITextFieldDelegate>
+@interface RMAddWorkoutViewController () <UITableViewDataSource, UITableViewDelegate, RMSelectExercisesViewControllerDelegate, UITextFieldDelegate, RMEditExerciseViewControllerDelegate>
 
 @property (strong, nonatomic) NSMutableArray *exerciseList;
 @property (strong, nonatomic) RMExerciseObject *exerciseSelected;
@@ -77,7 +78,22 @@
             }
         }
     }
+    if ([sender isKindOfClass:[NSIndexPath class]]) {
+        if ([segue.identifier isEqualToString:@"exercisesToEditExercisesSegue"]) {
+            if ([segue.destinationViewController isKindOfClass:[RMEditExerciseViewController class]]) {
+                RMEditExerciseViewController *editExerciseVC = segue.destinationViewController;
+                NSIndexPath *indexPath = sender;
+                editExerciseVC.exerciseData = [RMExercisesData exerciseList][indexPath.row];
+            }
+        }
+    }
+    
+    if ([segue.destinationViewController isKindOfClass:[RMEditExerciseViewController class]]) {
+        RMEditExerciseViewController *editExerciseVC = segue.destinationViewController;
+        editExerciseVC.delegate = self;
+    }
 }
+
 
 
 #pragma mark - UITableView Data Source
@@ -89,8 +105,10 @@
     
     if ([self.exerciseList count] > 0 && indexPath.section == 0) {
         cell.textLabel.text = self.exerciseList[indexPath.row][WORKOUT_NAME];
-    } else if ([self.exerciseList count] == 0 && indexPath.section == 1) {
+        cell.accessoryType = UITableViewCellAccessoryDetailDisclosureButton;
+    } else if (indexPath.section == 1) {
         cell.textLabel.text = @"Add Exercise";
+        cell.accessoryType = UITableViewCellAccessoryNone;
     }
     
     return cell;
@@ -116,6 +134,11 @@
     } else {
         [self performSegueWithIdentifier:@"addWorkoutToSelectExerciseSegue" sender:indexPath];
     }
+}
+
+- (void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath
+{
+    [self performSegueWithIdentifier:@"exercisesToEditExercisesSegue" sender:indexPath];
 }
 
 #pragma mark - IBActions

@@ -21,7 +21,7 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d6I-Tq-3wS">
-                                <rect key="frame" x="113" y="421" width="95" height="30"/>
+                                <rect key="frame" x="113" y="376" width="95" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Start Workout">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -98,15 +98,15 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" textLabel="HcT-BW-Rh2" rowHeight="40" style="IBUITableViewCellStyleDefault" id="zwu-XB-7Wa">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="detailDisclosureButton" indentationWidth="10" reuseIdentifier="Cell" textLabel="HcT-BW-Rh2" rowHeight="40" style="IBUITableViewCellStyleDefault" id="zwu-XB-7Wa">
                                         <rect key="frame" x="0.0" y="22" width="320" height="40"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="zwu-XB-7Wa" id="qkt-BC-fVr">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="39"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="253" height="39"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Click to Add Exercise" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="HcT-BW-Rh2">
-                                                    <rect key="frame" x="15" y="0.0" width="290" height="39"/>
+                                                    <rect key="frame" x="15" y="0.0" width="238" height="39"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" name="ArialHebrew" family="Arial Hebrew" pointSize="14"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -142,23 +142,24 @@
                                 <rect key="frame" x="20" y="108" width="280" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="words" returnKeyType="done"/>
                             </textField>
                         </subviews>
                         <color key="backgroundColor" red="0.90196079015731812" green="0.90196079015731812" blue="0.90196079015731812" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
-                    <navigationItem key="navigationItem" id="QpS-Dd-mEx"/>
+                    <navigationItem key="navigationItem" title="Customize Routine" id="QpS-Dd-mEx"/>
                     <connections>
                         <outlet property="cancelButton" destination="vp2-vE-08T" id="Psn-vl-Sy6"/>
                         <outlet property="exercisesTableView" destination="umc-VZ-LTF" id="k7z-M3-rM5"/>
                         <outlet property="finishButton" destination="Qyb-E4-u9n" id="4hd-bZ-nNl"/>
                         <outlet property="workoutNameTextField" destination="ldD-LE-BNW" id="4Ub-dI-Aez"/>
                         <segue destination="mkl-Ti-f9q" kind="push" identifier="addWorkoutToSelectExerciseSegue" id="IU9-pP-YmD"/>
+                        <segue destination="C3M-zW-sGx" kind="push" identifier="exercisesToEditExercisesSegue" id="Aks-L3-X2X"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="y5W-xz-dnt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1773" y="-757"/>
+            <point key="canvasLocation" x="1677" y="-485"/>
         </scene>
         <!--Edit Exercise View Controller-->
         <scene sceneID="2DS-cW-ezC">
@@ -240,7 +241,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dpa-nR-4jH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2717" y="-759"/>
+            <point key="canvasLocation" x="2239" y="-843"/>
         </scene>
         <!--Select Exercises View Controller-->
         <scene sceneID="fBV-XA-I1I">
@@ -259,15 +260,15 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="detailButton" indentationWidth="10" reuseIdentifier="Cell" textLabel="Thj-TC-HMQ" rowHeight="40" style="IBUITableViewCellStyleDefault" id="SWE-Kh-JDv">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" textLabel="Thj-TC-HMQ" rowHeight="40" style="IBUITableViewCellStyleDefault" id="SWE-Kh-JDv">
                                         <rect key="frame" x="0.0" y="86" width="320" height="40"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="SWE-Kh-JDv" id="YWU-Se-2Ks">
-                                            <rect key="frame" x="0.0" y="0.0" width="273" height="39"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="39"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Thj-TC-HMQ">
-                                                    <rect key="frame" x="15" y="0.0" width="258" height="39"/>
+                                                    <rect key="frame" x="15" y="0.0" width="290" height="39"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" name="ArialHebrew" family="Arial Hebrew" pointSize="14"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -285,12 +286,11 @@
                     <navigationItem key="navigationItem" id="MSH-Ns-MKX"/>
                     <connections>
                         <outlet property="exercisesTableView" destination="hdR-vv-D8F" id="bHP-TO-ADN"/>
-                        <segue destination="C3M-zW-sGx" kind="push" identifier="exercisesToEditExercisesSegue" id="4Fk-eO-lPn"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="e1T-Fa-5hb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2205" y="-759"/>
+            <point key="canvasLocation" x="2239" y="-139"/>
         </scene>
         <!--Workouts View Controller-->
         <scene sceneID="axP-1d-iU1">
@@ -390,7 +390,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tgI-nV-MrD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1736" y="53"/>
+            <point key="canvasLocation" x="1677" y="685"/>
         </scene>
         <!--Exercise Data Input View Controller-->
         <scene sceneID="uuF-Sq-A2z">
@@ -493,7 +493,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TRZ-1x-3nf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2227" y="53"/>
+            <point key="canvasLocation" x="2239" y="685"/>
         </scene>
     </scenes>
     <resources>

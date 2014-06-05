@@ -80,15 +80,11 @@
     NSLog(@"%@", selectedExercise);
 }
 
-- (void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath
-{
-    [self performSegueWithIdentifier:@"exercisesToEditExercisesSegue" sender:indexPath];
-}
-
 - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return YES;
 }
+
 
 
 #pragma mark - Navigation
@@ -96,16 +92,6 @@
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    if ([sender isKindOfClass:[NSIndexPath class]]) {
-        if ([segue.identifier isEqualToString:@"exercisesToEditExercisesSegue"]) {
-            if ([segue.destinationViewController isKindOfClass:[RMEditExerciseViewController class]]) {
-                RMEditExerciseViewController *editExerciseVC = segue.destinationViewController;
-                NSIndexPath *indexPath = sender;
-                editExerciseVC.exerciseData = [RMExercisesData exerciseList][indexPath.row];
-            }
-        }
-    }
-    
     if ([segue.destinationViewController isKindOfClass:[RMEditExerciseViewController class]]) {
         RMEditExerciseViewController *editExerciseVC = segue.destinationViewController;
         editExerciseVC.delegate = self;
