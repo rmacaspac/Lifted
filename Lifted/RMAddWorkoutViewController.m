@@ -7,15 +7,16 @@
 //
 
 #import "RMAddWorkoutViewController.h"
-#import "RMExercises.h"
+#import "RMExerciseObject.h"
 #import "RMSelectExercisesViewController.h"
 
-@interface RMAddWorkoutViewController () <UITableViewDataSource, UITableViewDelegate, RMSelectExercisesViewControllerDelegate>
+@interface RMAddWorkoutViewController () <UITableViewDataSource, UITableViewDelegate, RMSelectExercisesViewControllerDelegate, UITextFieldDelegate>
 
 @property (strong, nonatomic) NSMutableArray *exerciseList;
-@property (strong, nonatomic) RMExercises *exerciseSelected;
+@property (strong, nonatomic) RMExerciseObject *exerciseSelected;
 
-@property (strong, nonatomic) IBOutlet UITextField *addWorkoutTextField;
+
+@property (strong, nonatomic) IBOutlet UITextField *workoutNameTextField;
 @property (strong, nonatomic) IBOutlet UITableView *exercisesTableView;
 @property (strong, nonatomic) IBOutlet UIButton *cancelButton;
 @property (strong, nonatomic) IBOutlet UIButton *finishButton;
@@ -50,7 +51,8 @@
     
     self.exercisesTableView.delegate = self;
     self.exercisesTableView.dataSource = self;
-
+    self.workoutNameTextField.delegate = self;
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -67,6 +69,14 @@
         RMSelectExercisesViewController *selectExerciseVC = segue.destinationViewController;
         selectExerciseVC.delegate = self;
     }
+    
+    if ([sender isKindOfClass:[NSIndexPath class]]) {
+        if ([segue.identifier isEqualToString:@"addWorkoutToSelectExerciseSegue"]) {
+            if ([segue.destinationViewController isKindOfClass:[RMSelectExercisesViewController class]]) {
+                RMSelectExercisesViewController *selectExercisesVC = segue.destinationViewController;
+            }
+        }
+    }
 }
 
 
@@ -76,9 +86,9 @@
 {
     static NSString *cellIdentifier = @"Cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
-
+    
     if ([self.exerciseList count] > 0 && indexPath.section == 0) {
-        cell.textLabel.text = [self.exerciseList objectAtIndex:indexPath.row];
+        cell.textLabel.text = self.exerciseList[indexPath.row][WORKOUT_NAME];
     } else if ([self.exerciseList count] == 0 && indexPath.section == 1) {
         cell.textLabel.text = @"Add Exercise";
     }
@@ -101,7 +111,11 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [self performSegueWithIdentifier:@"addWorkoutToSelectExerciseSegue" sender:indexPath];
+    if (indexPath.section == 0) {
+        [self performSegueWithIdentifier:@"addWorkoutToSelectExerciseSegue" sender:indexPath];
+    } else {
+        [self performSegueWithIdentifier:@"addWorkoutToSelectExerciseSegue" sender:indexPath];
+    }
 }
 
 #pragma mark - IBActions
@@ -117,10 +131,6 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-- (IBAction)addWorkoutButtonPressed:(UIButton *)sender
-{
-
-}
 
 #pragma mark - Helper Methods
 
@@ -128,11 +138,13 @@
 - (RMWorkoutObject *)workoutWithExercises
 {
     RMWorkoutObject *workout = [[RMWorkoutObject alloc] init];
-    workout.workoutName = self.addWorkoutTextField.text;
+    workout.workoutName = self.workoutNameTextField.text;
     workout.workoutExercises = self.exerciseList;
     
     return workout;
 }
+
+
 
 #pragma mark - RMSelectExercisesViewController Delegate
 
@@ -141,6 +153,14 @@
     [self.exerciseList addObject:selectedExercise];
     NSLog(@"exerciseList has %@ objects", self.exerciseList);
     [self.exercisesTableView reloadData];
+}
+
+#pragma mark - UITextField Delegate
+
+-(BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [textField resignFirstResponder];
+    return YES;
 }
 
 

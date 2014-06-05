@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "RMExercises.h"
+#import "RMExercisesData.h"
+#import "RMExerciseObject.h"
 
 @protocol RMSelectExercisesViewControllerDelegate <NSObject>
 

@@ -64,7 +64,7 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
     
     
-    cell.textLabel.text = self.workoutExercises[indexPath.row];
+    cell.textLabel.text = self.workoutExercises[indexPath.row][WORKOUT_NAME];
     
     return cell;
 }
@@ -73,6 +73,10 @@
 {
     return [self.workoutExercises count];
 }
+
+#pragma mark - UITableView Delegate
+
+
 
 /*
 #pragma mark - Navigation

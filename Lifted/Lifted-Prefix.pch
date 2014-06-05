@@ -16,5 +16,9 @@
 
 #define WORKOUT_NAME @"workoutName"
 #define WORKOUT_EXERCISES @"workoutExercises"
+#define WORKOUT_REP_MIN @"workoutRepMin"
+#define WORKOUT_REP_MAX @"workoutRepMax"
+#define WORKOUT_WEIGHT @"workoutWeight"
+#define WORKOUT_SETS @"workoutSets"
 
 #endif

@@ -13,6 +13,4 @@
 @property (strong, nonatomic) NSMutableArray *workoutExercises;
 @property (strong, nonatomic) NSString *workoutName;
 
-- (id)initWithData:(NSDictionary *)workouts;
-
 @end
