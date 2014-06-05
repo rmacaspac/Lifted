@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface RMIndividualWorkoutViewController : UIViewController
+@interface RMExerciseDataInputViewController : UIViewController
+
+@property (strong, nonatomic) NSMutableArray *exerciseData;
 
 @end

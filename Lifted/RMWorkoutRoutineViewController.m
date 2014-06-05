@@ -7,6 +7,7 @@
 //
 
 #import "RMWorkoutRoutineViewController.h"
+#import "RMExerciseDataInputViewController.h"
 
 @interface RMWorkoutRoutineViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -76,17 +77,27 @@
 
 #pragma mark - UITableView Delegate
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [self performSegueWithIdentifier:@"routineToDataInputSegue" sender:indexPath];
+}
 
 
-/*
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    if ([sender isKindOfClass:[NSIndexPath class]]) {
+        if ([segue.identifier isEqualToString:@"routineToDataInputSegue"]) {
+            if ([segue.destinationViewController isKindOfClass:[RMExerciseDataInputViewController class]]) {
+                RMExerciseDataInputViewController *exerciseDataInputVC = segue.destinationViewController;
+                NSIndexPath *indexPath = sender;
+                exerciseDataInputVC.exerciseData = self.workoutExercises[indexPath.row];
+            }
+        }
+    }
 }
-*/
+
 
 @end
