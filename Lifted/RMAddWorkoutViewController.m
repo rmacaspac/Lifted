@@ -10,12 +10,15 @@
 #import "RMExerciseObject.h"
 #import "RMSelectExercisesViewController.h"
 #import "RMEditExerciseViewController.h"
+#import "RMWorkoutObject.h"
+#import "RMCoreDataHelper.h"
+
+
 
 @interface RMAddWorkoutViewController () <UITableViewDataSource, UITableViewDelegate, RMSelectExercisesViewControllerDelegate, UITextFieldDelegate, RMEditExerciseViewControllerDelegate>
 
 @property (strong, nonatomic) NSMutableArray *exerciseList;
 @property (strong, nonatomic) RMExerciseObject *exerciseSelected;
-
 
 @property (strong, nonatomic) IBOutlet UITextField *workoutNameTextField;
 @property (strong, nonatomic) IBOutlet UITableView *exercisesTableView;
@@ -35,6 +38,7 @@
     }
     return _exerciseList;
 }
+
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -70,7 +74,6 @@
         RMSelectExercisesViewController *selectExerciseVC = segue.destinationViewController;
         selectExerciseVC.delegate = self;
     }
-    
     if ([sender isKindOfClass:[NSIndexPath class]]) {
         if ([segue.identifier isEqualToString:@"addWorkoutToSelectExerciseSegue"]) {
             if ([segue.destinationViewController isKindOfClass:[RMSelectExercisesViewController class]]) {
@@ -87,7 +90,6 @@
             }
         }
     }
-    
     if ([segue.destinationViewController isKindOfClass:[RMEditExerciseViewController class]]) {
         RMEditExerciseViewController *editExerciseVC = segue.destinationViewController;
         editExerciseVC.delegate = self;
@@ -150,31 +152,37 @@
 
 - (IBAction)finishButtonPressed:(UIButton *)sender
 {
-    [self.delegate didAddWorkout:[self workoutWithExercises]];
+    [self routineWithExercises:self.exerciseList];
+    [self.delegate didAddWorkout:self.exerciseList];
+    
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-
 #pragma mark - Helper Methods
 
-
-- (RMWorkoutObject *)workoutWithExercises
+- (Routine *)routineWithExercises:(NSMutableArray *)exercises
 {
-    RMWorkoutObject *workout = [[RMWorkoutObject alloc] init];
-    workout.workoutName = self.workoutNameTextField.text;
-    workout.workoutExercises = self.exerciseList;
+    // Saving exercise name under routine using Core Data
+    NSManagedObjectContext *context = [RMCoreDataHelper managedObjectContext];
     
-    return workout;
+    Routine *routine = [NSEntityDescription insertNewObjectForEntityForName:@"Routine" inManagedObjectContext:context];
+    routine.routineName = self.workoutNameTextField.text;
+    [routine.routineExercises setByAddingObjectsFromArray:exercises];
+    
+    NSError *error = nil;
+    if (![[routine managedObjectContext] save:&error]) {
+        NSLog(@"%@", error);
+    }
+
+    return routine;
 }
-
-
 
 #pragma mark - RMSelectExercisesViewController Delegate
 
-- (void)didSelectExercise:(NSMutableArray *)selectedExercise;
+- (void)didSelectExercise:(Routine *)selectedExercise;
 {
     [self.exerciseList addObject:selectedExercise];
-    NSLog(@"exerciseList has %@ objects", self.exerciseList);
+    NSLog(@"Array with new exercise %@", self.exerciseList);
     [self.exercisesTableView reloadData];
 }
 
@@ -187,6 +195,13 @@
 }
 
 
+#pragma mark - RMEditExerciseViewController Delegate
+
+- (void)didChangeData:(RMExerciseObject *)editedExerciseObject
+{
+//    self.exercises = editedExerciseObject;
+//    NSLog(@"new exercise object is %@", self.exercises);
+}
 
 
 

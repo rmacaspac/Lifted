@@ -16,6 +16,7 @@
 @property (strong, nonatomic) IBOutlet UITableView *workoutTableView;
 @property (strong, nonatomic) IBOutlet UILabel *repMinLabel;
 @property (strong, nonatomic) IBOutlet UILabel *repMaxLabel;
+@property (strong, nonatomic) IBOutlet UILabel *dateLabel;
 
 
 @end
@@ -38,6 +39,12 @@
     
     self.workoutTableView.dataSource = self;
     self.workoutTableView.delegate = self;
+    
+    
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
+    self.dateLabel.text = [dateFormatter stringFromDate:[NSDate date]];
+    
     
     self.exerciseNameLabel.text = [self.exerciseData valueForKey:WORKOUT_NAME];
     self.repMinLabel.text = [NSString stringWithFormat:@"%@",[self.exerciseData valueForKey:WORKOUT_REP_MIN]];

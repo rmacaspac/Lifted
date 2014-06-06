@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="5063" systemVersion="13D65" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="Exercise" representedClassName="Exercise" syncable="YES">
+        <attribute name="exerciseName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="repMax" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="repMin" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <relationship name="numberOfSets" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Sets" inverseName="exercise" inverseEntity="Sets" syncable="YES"/>
+        <relationship name="routine" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Routine" inverseName="routineExercises" inverseEntity="Routine" syncable="YES"/>
+    </entity>
+    <entity name="Routine" representedClassName="Routine" syncable="YES">
+        <attribute name="routineDate" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="routineName" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="routineExercises" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Exercise" inverseName="routine" inverseEntity="Exercise" syncable="YES"/>
+    </entity>
+    <entity name="Sets" representedClassName="Sets" syncable="YES">
+        <attribute name="numberOfReps" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="numberOfSets" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="weight" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <relationship name="exercise" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Exercise" inverseName="numberOfSets" inverseEntity="Exercise" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Exercise" positionX="144" positionY="-10" width="128" height="118"/>
+        <element name="Routine" positionX="-81" positionY="-16" width="128" height="88"/>
+        <element name="Sets" positionX="430" positionY="5" width="128" height="103"/>
+    </elements>
+</model>

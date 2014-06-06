@@ -10,4 +10,6 @@
 
 @interface RMHomeViewController : UIViewController
 
+@property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
+
 @end

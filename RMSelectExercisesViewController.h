@@ -9,10 +9,11 @@
 #import <UIKit/UIKit.h>
 #import "RMExercisesData.h"
 #import "RMExerciseObject.h"
+#import "Routine.h"
 
 @protocol RMSelectExercisesViewControllerDelegate <NSObject>
 
-- (void)didSelectExercise:(NSMutableArray *)selectedExercise;
+- (void)didSelectExercise:(Routine *)selectedExercise;
 
 @end
 

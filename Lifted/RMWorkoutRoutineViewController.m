@@ -11,18 +11,20 @@
 
 @interface RMWorkoutRoutineViewController () <UITableViewDataSource, UITableViewDelegate>
 
+@property (strong, nonatomic) NSArray *routineExercises;
+
 @property (strong, nonatomic) IBOutlet UITableView *workoutRoutineTableView;
 
 @end
 
 @implementation RMWorkoutRoutineViewController
 
-- (NSArray *)workoutExercises
+- (NSArray *)routineExercises
 {
-    if (!_workoutExercises) {
-        _workoutExercises = [[NSArray alloc] init];
+    if (!_routineExercises) {
+        _routineExercises = [[NSArray alloc] init];
     }
-    return _workoutExercises;
+    return _routineExercises;
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -42,11 +44,9 @@
     self.workoutRoutineTableView.dataSource = self;
     self.workoutRoutineTableView.delegate = self;
     
-    self.workoutExercises = [self.workoutObject valueForKey:WORKOUT_EXERCISES];
-    
-    [self.workoutRoutineTableView reloadData];
-    
-    NSLog(@"workout exercises %@", self.workoutExercises);
+    self.navigationItem.title = [self.routine valueForKey:ROUTINE_NAME];
+    self.routineExercises = [self.routine valueForKey:ROUTINE_EXERCISES];
+    NSLog(@"workout exercises %@", self.routineExercises);
     
 
 }
@@ -64,15 +64,14 @@
     static NSString *cellIdentifier = @"Cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
     
-    
-    cell.textLabel.text = self.workoutExercises[indexPath.row][WORKOUT_NAME];
+    cell.textLabel.text = self.routineExercises[indexPath.row][WORKOUT_NAME];
     
     return cell;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [self.workoutExercises count];
+    return [self.routineExercises count];
 }
 
 #pragma mark - UITableView Delegate
@@ -93,7 +92,7 @@
             if ([segue.destinationViewController isKindOfClass:[RMExerciseDataInputViewController class]]) {
                 RMExerciseDataInputViewController *exerciseDataInputVC = segue.destinationViewController;
                 NSIndexPath *indexPath = sender;
-                exerciseDataInputVC.exerciseData = self.workoutExercises[indexPath.row];
+                exerciseDataInputVC.exerciseData = self.routineExercises[indexPath.row];
             }
         }
     }

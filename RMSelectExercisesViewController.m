@@ -8,13 +8,16 @@
 
 #import "RMSelectExercisesViewController.h"
 #import "RMEditExerciseViewController.h"
+#import "RMCoreDataHelper.h"
+#import "Exercise.h"
 
 
-@interface RMSelectExercisesViewController () <UITableViewDataSource, UITableViewDelegate, RMEditExerciseViewControllerDelegate>
+@interface RMSelectExercisesViewController () <UITableViewDataSource, UITableViewDelegate>
 
 @property (strong, nonatomic) NSMutableArray *exerciseObjects;
 @property (strong, nonatomic) NSMutableArray *selectedExercise;
 @property (strong, nonatomic) RMExerciseObject *exercises;
+@property (strong, nonatomic) Routine *routine;
 
 @property (strong, nonatomic) IBOutlet UITableView *exercisesTableView;
 
@@ -38,9 +41,6 @@
     
     self.exercisesTableView.delegate = self;
     self.exercisesTableView.dataSource = self;
-    
-    [self.exercisesTableView reloadData];
-
 }
 
 - (void)didReceiveMemoryWarning
@@ -71,13 +71,9 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSMutableArray *selectedExercise = [RMExercisesData exerciseList][indexPath.row];
-    self.selectedExercise = selectedExercise;
-    [self.delegate didSelectExercise:selectedExercise];
+
+    [self.delegate didSelectExercise:[RMExercisesData exerciseList][indexPath.row]];
     [self.navigationController popViewControllerAnimated:YES];
-    
-    
-    NSLog(@"%@", selectedExercise);
 }
 
 - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
@@ -86,7 +82,7 @@
 }
 
 
-
+/*
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -98,6 +94,7 @@
     }
 }
 
+
 #pragma mark - RMEditExerciseViewController Delegate
 
 - (void)didChangeData:(RMExerciseObject *)editedExerciseObject
@@ -105,6 +102,10 @@
     self.exercises = editedExerciseObject;
     NSLog(@"new exercise object is %@", self.exercises);
 }
+ */
+
+
+
 
 
 

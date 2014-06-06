@@ -10,11 +10,13 @@
 #import "RMAddWorkoutViewController.h"
 #import "RMWorkoutObject.h"
 #import "RMWorkoutRoutineViewController.h"
+#import "Routine.h"
+#import "RMCoreDataHelper.h"
 
 
 @interface RMWorkoutsViewController () <UITableViewDataSource, UITableViewDelegate, RMAddWorkoutViewControllerDelegate>
 
-@property (strong, nonatomic) NSMutableArray *workoutExercises;
+@property (strong, nonatomic) NSMutableArray *routineExercises;
 @property (strong, nonatomic) NSDictionary *workoutObjects;
 @property (strong, nonatomic) NSString *workoutName;
 @property (strong, nonatomic) RMWorkoutObject *workout;
@@ -25,12 +27,12 @@
 
 @implementation RMWorkoutsViewController
 
-- (NSMutableArray *)workoutExercises
+- (NSMutableArray *)routineExercises
 {
-    if (!_workoutExercises) {
-        _workoutExercises = [[NSMutableArray alloc] init];
+    if (!_routineExercises) {
+        _routineExercises = [[NSMutableArray alloc] init];
     }
-    return _workoutExercises;
+    return _routineExercises;
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -52,6 +54,15 @@
     
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    [self routineWithExercises];
+    
+    NSLog(@"Routine Info is %@", self.routineExercises);
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -63,10 +74,9 @@
     static NSString *cellIdentifier = @"Cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
     
-    if (indexPath.section == 0 && [self.workoutExercises count] > 0) {
-        cell.textLabel.text = self.workoutExercises[indexPath.row][WORKOUT_NAME];
-        NSLog(@"Workout name is %@", self.workoutExercises[indexPath.row][WORKOUT_NAME]);
-    }
+    if (indexPath.section == 0) {
+        cell.textLabel.text = self.routineExercises[indexPath.row][ROUTINE_NAME];
+        }
     else if (indexPath.section == 1) {
         cell.textLabel.text = @"Add Workout";
     }
@@ -77,7 +87,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     if (section == 0) {
-        return [self.workoutExercises count];
+        return [self.routineExercises count];
     } else {
         return 1;
     }
@@ -114,8 +124,7 @@
             if ([segue.destinationViewController isKindOfClass:[RMWorkoutRoutineViewController class]]) {
                 RMWorkoutRoutineViewController *workoutRoutineVC = segue.destinationViewController;
                 NSIndexPath *indexPath = sender;
-                RMWorkoutObject *workoutObject = self.workoutExercises[indexPath.row];
-                workoutRoutineVC.workoutObject = workoutObject;
+                workoutRoutineVC.routine = self.routineExercises[indexPath.row];
             }
         }
     }
@@ -123,12 +132,11 @@
 
 #pragma mark - UIAddWorkoutViewController Delegate
 
-- (void)didAddWorkout:(RMWorkoutObject *)workoutObject
+- (void)didAddWorkout:(NSMutableArray *)routineObject
 {
-    // Adding workoutObject from addWorkoutViewController to workoutObjects instance
-    [self.workoutExercises addObject:[self workoutInfoAsPropertyLists:workoutObject]];
-    
-    NSLog(@"new workout is %@", self.workoutExercises);
+    // Adding workoutObject from addWorkoutViewController to workoutObjects
+    self.routineExercises = routineObject;
+    NSLog(@"new workout is %@", self.routineExercises);
     [self.workoutsTableView reloadData];
 }
 
@@ -136,7 +144,7 @@
 
 - (NSDictionary *)workoutInfoAsPropertyLists:(RMWorkoutObject *)workout
 {
-    self.workoutObjects = @{WORKOUT_NAME: workout.workoutName, WORKOUT_EXERCISES: workout.workoutExercises};
+    self.workoutObjects = @{WORKOUT_NAME: workout.workoutName, ROUTINE_EXERCISES: workout.workoutExercises};
     
     [self addedWorkoutObject];
     
@@ -148,11 +156,29 @@
 {
     RMWorkoutObject *workout = [[RMWorkoutObject alloc] init];
     workout.workoutName = [self.workoutObjects objectForKey:WORKOUT_NAME];
-    workout.workoutExercises = [self.workoutObjects objectForKey:WORKOUT_EXERCISES];
+    workout.workoutExercises = [self.workoutObjects objectForKey:ROUTINE_EXERCISES];
     self.workout = workout;
     
     return self.workout;
 }
+
+- (NSMutableArray *)routineWithExercises
+{
+    // Querying Album object using Core Data
+    
+    NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"Routine"];
+    fetchRequest.resultType = NSDictionaryResultType;
+    [fetchRequest setPropertiesToFetch:[NSArray arrayWithObjects:@"routineName", @"routineExercises", nil]];
+    
+    NSError *error = nil;
+    
+    NSArray *routineWithExercises = [[RMCoreDataHelper managedObjectContext] executeFetchRequest:fetchRequest error:&error];
+    
+    self.routineExercises = [routineWithExercises mutableCopy];
+    
+    return self.routineExercises;
+}
+
 
 
 

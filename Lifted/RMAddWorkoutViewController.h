@@ -8,16 +8,18 @@
 
 #import <UIKit/UIKit.h>
 #import "RMWorkoutObject.h"
+#import "Routine.h"
 
 @protocol RMAddWorkoutViewControllerDelegate <NSObject>
 
-- (void)didAddWorkout:(RMWorkoutObject *)workoutObject;
+- (void)didAddWorkout:(NSMutableArray *)routineObject;
 
 @end
 
 @interface RMAddWorkoutViewController : UIViewController
 
 @property (weak, nonatomic) id <RMAddWorkoutViewControllerDelegate> delegate;
+@property (strong, nonatomic) Routine *routine;
 
 
 

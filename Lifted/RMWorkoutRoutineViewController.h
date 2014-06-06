@@ -8,10 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "RMWorkoutObject.h"
+#import "Routine.h"
 
 @interface RMWorkoutRoutineViewController : UIViewController
 
-@property (strong, nonatomic) NSArray *workoutExercises;
-@property (strong, nonatomic) RMWorkoutObject *workoutObject;
+@property (strong, nonatomic) Routine *routine;
 
 @end
