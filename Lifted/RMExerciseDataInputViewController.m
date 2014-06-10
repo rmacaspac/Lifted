@@ -46,9 +46,9 @@
     self.dateLabel.text = [dateFormatter stringFromDate:[NSDate date]];
     
     
-    self.exerciseNameLabel.text = [self.exerciseData valueForKey:WORKOUT_NAME];
-    self.repMinLabel.text = [NSString stringWithFormat:@"%@",[self.exerciseData valueForKey:WORKOUT_REP_MIN]];
-    self.repMaxLabel.text = [NSString stringWithFormat:@"%@",[self.exerciseData valueForKey:WORKOUT_REP_MAX]];
+    self.exerciseNameLabel.text = [self.exerciseData valueForKey:@"name"];
+    self.repMinLabel.text = [NSString stringWithFormat:@"%@",[self.exerciseData valueForKey:EXERCISE_REP_MIN]];
+    self.repMaxLabel.text = [NSString stringWithFormat:@"%@",[self.exerciseData valueForKey:EXERCISE_REP_MAX]];
     
     NSLog(@"the exercises data for routine is %@", self.exerciseData);
 }
@@ -79,7 +79,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     if (section == 0) {
-        return [[self.exerciseData valueForKey:WORKOUT_SETS] integerValue];
+        return 3;
     } else {
         return 1;
     }

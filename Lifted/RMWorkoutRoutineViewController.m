@@ -8,10 +8,9 @@
 
 #import "RMWorkoutRoutineViewController.h"
 #import "RMExerciseDataInputViewController.h"
+#import "RMCoreDataHelper.h"
 
 @interface RMWorkoutRoutineViewController () <UITableViewDataSource, UITableViewDelegate>
-
-@property (strong, nonatomic) NSArray *routineExercises;
 
 @property (strong, nonatomic) IBOutlet UITableView *workoutRoutineTableView;
 
@@ -19,10 +18,10 @@
 
 @implementation RMWorkoutRoutineViewController
 
-- (NSArray *)routineExercises
+- (NSMutableArray *)routineExercises
 {
     if (!_routineExercises) {
-        _routineExercises = [[NSArray alloc] init];
+        _routineExercises = [[NSMutableArray alloc] init];
     }
     return _routineExercises;
 }
@@ -44,11 +43,11 @@
     self.workoutRoutineTableView.dataSource = self;
     self.workoutRoutineTableView.delegate = self;
     
-    self.navigationItem.title = [self.routine valueForKey:ROUTINE_NAME];
-    self.routineExercises = [self.routine valueForKey:ROUTINE_EXERCISES];
-    NSLog(@"workout exercises %@", self.routineExercises);
+    self.navigationItem.title = [self.routine valueForKey:@"name"];
     
-
+    NSLog(@"workout exercises %@", self.routine);
+    [self orderRoutineExercises];
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -64,7 +63,7 @@
     static NSString *cellIdentifier = @"Cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
     
-    cell.textLabel.text = self.routineExercises[indexPath.row][WORKOUT_NAME];
+    cell.textLabel.text = [self.routineExercises valueForKey:@"name"][indexPath.row];
     
     return cell;
 }
@@ -91,12 +90,21 @@
         if ([segue.identifier isEqualToString:@"routineToDataInputSegue"]) {
             if ([segue.destinationViewController isKindOfClass:[RMExerciseDataInputViewController class]]) {
                 RMExerciseDataInputViewController *exerciseDataInputVC = segue.destinationViewController;
-                NSIndexPath *indexPath = sender;
+                NSIndexPath *indexPath = [self.workoutRoutineTableView indexPathForSelectedRow];
                 exerciseDataInputVC.exerciseData = self.routineExercises[indexPath.row];
             }
         }
     }
 }
+
+- (void)orderRoutineExercises
+{
+    NSSet *unorderedExercises = self.routine.exercises;
+    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES];
+    NSArray *orderedExercises = [unorderedExercises sortedArrayUsingDescriptors:@[sortDescriptor]];
+    self.routineExercises = [orderedExercises mutableCopy];
+}
+
 
 
 @end

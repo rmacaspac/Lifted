@@ -7,18 +7,20 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "RMExercisesData.h"
 #import "RMExerciseObject.h"
-#import "Routine.h"
+#import "Exercise.h"
 
 @protocol RMSelectExercisesViewControllerDelegate <NSObject>
 
-- (void)didSelectExercise:(Routine *)selectedExercise;
+- (void)didSelectExercise:(NSMutableArray *)selectedExercise;
 
 @end
 
 @interface RMSelectExercisesViewController : UIViewController
 
 @property (weak, nonatomic) id <RMSelectExercisesViewControllerDelegate> delegate;
+
+@property (strong, nonatomic) NSMutableArray *exerciseObject;
+@property (strong, nonatomic) Exercise *exercise;
 
 @end

@@ -10,12 +10,11 @@
 
 @interface RMExerciseObject : NSObject
 
-@property (strong, nonatomic) NSString *exerciseName;
-@property (nonatomic) int numberOfSets;
-@property (nonatomic) int repMinNumber;
-@property (nonatomic) int repMaxNumber;
-@property (nonatomic) float weightNumber;
-@property (strong, nonatomic) NSMutableArray *exerciseData;
+@property (strong, nonatomic) NSString * exerciseName;
+@property (nonatomic) int repMax;
+@property (nonatomic) int repMin;
+@property (nonatomic) int sets;
+@property (strong, nonatomic) NSMutableSet *numberOfSets;
 
 - (id)initWithData:(NSDictionary *)exerciseInfo;
 

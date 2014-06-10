@@ -32,9 +32,9 @@
 		26E632FE19411BBB00EA92AE /* RMExerciseDataInputTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 26E632FD19411BBB00EA92AE /* RMExerciseDataInputTableViewCell.m */; };
 		26E633021941333C00EA92AE /* Lifted.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 26E633001941333C00EA92AE /* Lifted.xcdatamodeld */; };
 		26E6336719415F6200EA92AE /* RMCoreDataHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 26E6336619415F6200EA92AE /* RMCoreDataHelper.m */; };
-		26E6337A19423B7E00EA92AE /* Routine.m in Sources */ = {isa = PBXBuildFile; fileRef = 26E6337919423B7E00EA92AE /* Routine.m */; };
-		26E6337D19423B7F00EA92AE /* Sets.m in Sources */ = {isa = PBXBuildFile; fileRef = 26E6337C19423B7F00EA92AE /* Sets.m */; };
-		26E6338019423B7F00EA92AE /* Exercise.m in Sources */ = {isa = PBXBuildFile; fileRef = 26E6337F19423B7F00EA92AE /* Exercise.m */; };
+		26E633B019466EC400EA92AE /* Routine.m in Sources */ = {isa = PBXBuildFile; fileRef = 26E633AF19466EC400EA92AE /* Routine.m */; };
+		26E633B319466EC400EA92AE /* Sets.m in Sources */ = {isa = PBXBuildFile; fileRef = 26E633B219466EC400EA92AE /* Sets.m */; };
+		26E633B619466EC400EA92AE /* Exercise.m in Sources */ = {isa = PBXBuildFile; fileRef = 26E633B519466EC400EA92AE /* Exercise.m */; };
 		26FA73D81939B94A00325F23 /* RMWorkoutsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26FA73D71939B94A00325F23 /* RMWorkoutsViewController.m */; };
 		26FA73DB1939B96B00325F23 /* RMHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26FA73DA1939B96B00325F23 /* RMHomeViewController.m */; };
 /* End PBXBuildFile section */
@@ -89,12 +89,12 @@
 		26E633011941333C00EA92AE /* Lifted.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Lifted.xcdatamodel; sourceTree = "<group>"; };
 		26E6336519415F6200EA92AE /* RMCoreDataHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMCoreDataHelper.h; sourceTree = "<group>"; };
 		26E6336619415F6200EA92AE /* RMCoreDataHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMCoreDataHelper.m; sourceTree = "<group>"; };
-		26E6337819423B7E00EA92AE /* Routine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Routine.h; sourceTree = "<group>"; };
-		26E6337919423B7E00EA92AE /* Routine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Routine.m; sourceTree = "<group>"; };
-		26E6337B19423B7F00EA92AE /* Sets.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Sets.h; sourceTree = "<group>"; };
-		26E6337C19423B7F00EA92AE /* Sets.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Sets.m; sourceTree = "<group>"; };
-		26E6337E19423B7F00EA92AE /* Exercise.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Exercise.h; sourceTree = "<group>"; };
-		26E6337F19423B7F00EA92AE /* Exercise.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Exercise.m; sourceTree = "<group>"; };
+		26E633AE19466EC400EA92AE /* Routine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Routine.h; sourceTree = "<group>"; };
+		26E633AF19466EC400EA92AE /* Routine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Routine.m; sourceTree = "<group>"; };
+		26E633B119466EC400EA92AE /* Sets.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Sets.h; sourceTree = "<group>"; };
+		26E633B219466EC400EA92AE /* Sets.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Sets.m; sourceTree = "<group>"; };
+		26E633B419466EC400EA92AE /* Exercise.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Exercise.h; sourceTree = "<group>"; };
+		26E633B519466EC400EA92AE /* Exercise.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Exercise.m; sourceTree = "<group>"; };
 		26FA73D61939B94A00325F23 /* RMWorkoutsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMWorkoutsViewController.h; sourceTree = "<group>"; };
 		26FA73D71939B94A00325F23 /* RMWorkoutsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMWorkoutsViewController.m; sourceTree = "<group>"; };
 		26FA73D91939B96B00325F23 /* RMHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMHomeViewController.h; sourceTree = "<group>"; };
@@ -163,8 +163,8 @@
 				269B8F471939534400D22A8A /* Main.storyboard */,
 				26E632EF193E82DC00EA92AE /* Home */,
 				26E632FA193FFCA400EA92AE /* Exercise Data Input */,
-				269B8F7E19396C8C00D22A8A /* Select Exercises */,
 				26E632F9193FFB5F00EA92AE /* Edit Exercise */,
+				269B8F7E19396C8C00D22A8A /* Select Exercises */,
 				269B8F7A1939609900D22A8A /* Add Workout */,
 				26E632EE193E829200EA92AE /* Workouts */,
 				26E632FB193FFCD100EA92AE /* Workout Routines */,
@@ -180,8 +180,6 @@
 			children = (
 				26E632F3193F8AEC00EA92AE /* RMExercisesData.h */,
 				26E632F4193F8AEC00EA92AE /* RMExercisesData.m */,
-				26E6336519415F6200EA92AE /* RMCoreDataHelper.h */,
-				26E6336619415F6200EA92AE /* RMCoreDataHelper.m */,
 				269B8F7919395A6900D22A8A /* Models */,
 				26E632E9193DA96000EA92AE /* arnold.jpg */,
 				269B8F3D1939534400D22A8A /* Lifted-Info.plist */,
@@ -298,12 +296,14 @@
 			isa = PBXGroup;
 			children = (
 				26E633001941333C00EA92AE /* Lifted.xcdatamodeld */,
-				26E6337E19423B7F00EA92AE /* Exercise.h */,
-				26E6337F19423B7F00EA92AE /* Exercise.m */,
-				26E6337B19423B7F00EA92AE /* Sets.h */,
-				26E6337C19423B7F00EA92AE /* Sets.m */,
-				26E6337819423B7E00EA92AE /* Routine.h */,
-				26E6337919423B7E00EA92AE /* Routine.m */,
+				26E633B419466EC400EA92AE /* Exercise.h */,
+				26E633B519466EC400EA92AE /* Exercise.m */,
+				26E633B119466EC400EA92AE /* Sets.h */,
+				26E633B219466EC400EA92AE /* Sets.m */,
+				26E633AE19466EC400EA92AE /* Routine.h */,
+				26E633AF19466EC400EA92AE /* Routine.m */,
+				26E6336519415F6200EA92AE /* RMCoreDataHelper.h */,
+				26E6336619415F6200EA92AE /* RMCoreDataHelper.m */,
 			);
 			name = "Core Data";
 			sourceTree = "<group>";
@@ -410,16 +410,16 @@
 				26FA73DB1939B96B00325F23 /* RMHomeViewController.m in Sources */,
 				269B8F6F1939562F00D22A8A /* RMAddWorkoutViewController.m in Sources */,
 				269B8F871939790D00D22A8A /* RMSelectExercisesViewController.m in Sources */,
-				26E6337D19423B7F00EA92AE /* Sets.m in Sources */,
 				269B8F421939534400D22A8A /* main.m in Sources */,
 				26FA73D81939B94A00325F23 /* RMWorkoutsViewController.m in Sources */,
 				26E633021941333C00EA92AE /* Lifted.xcdatamodeld in Sources */,
-				26E6338019423B7F00EA92AE /* Exercise.m in Sources */,
 				26E632F8193FC35E00EA92AE /* RMEditExerciseViewController.m in Sources */,
+				26E633B619466EC400EA92AE /* Exercise.m in Sources */,
 				269B8F8119396CDB00D22A8A /* RMExerciseObject.m in Sources */,
+				26E633B019466EC400EA92AE /* Routine.m in Sources */,
+				26E633B319466EC400EA92AE /* Sets.m in Sources */,
 				269B8F461939534400D22A8A /* RMAppDelegate.m in Sources */,
 				26E6336719415F6200EA92AE /* RMCoreDataHelper.m in Sources */,
-				26E6337A19423B7E00EA92AE /* Routine.m in Sources */,
 				26E632ED193E81A300EA92AE /* RMWorkoutRoutineViewController.m in Sources */,
 				26E632F5193F8AEC00EA92AE /* RMExercisesData.m in Sources */,
 				26E632F2193E9F4400EA92AE /* RMExerciseDataInputViewController.m in Sources */,

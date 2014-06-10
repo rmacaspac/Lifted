@@ -38,12 +38,10 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    self.workoutNameTextField.text = [self.exerciseData valueForKey:WORKOUT_NAME];
-    self.numberOfSetsTextField.text = [NSString stringWithFormat:@"%@", [self.exerciseData valueForKey:WORKOUT_SETS]];
-    self.repMinTextField.text = [NSString stringWithFormat:@"%@", [self.exerciseData valueForKey:WORKOUT_REP_MIN]];
-    self.repMaxTextField.text = [NSString stringWithFormat:@"%@", [self.exerciseData valueForKey:WORKOUT_REP_MAX]];
-    
-    
+    self.workoutNameTextField.text = [self.exerciseData valueForKey:EXERCISE_NAME];
+    self.numberOfSetsTextField.text = [NSString stringWithFormat:@"%@", [self.exerciseData valueForKey:EXERCISE_SETS]];
+    self.repMinTextField.text = [NSString stringWithFormat:@"%@", [self.exerciseData valueForKey:EXERCISE_REP_MIN]];
+    self.repMaxTextField.text = [NSString stringWithFormat:@"%@", [self.exerciseData valueForKey:EXERCISE_REP_MAX]];
 
 }
 
@@ -81,7 +79,7 @@
 
 - (NSDictionary *)newExerciseDataAsPropertyLists
 {
-    NSDictionary *exerciseData = @{WORKOUT_NAME : self.workoutNameTextField.text, WORKOUT_SETS : self.numberOfSetsTextField.text, WORKOUT_REP_MIN : self.repMinTextField.text, WORKOUT_REP_MAX : self.repMaxTextField.text};
+    NSDictionary *exerciseData = @{EXERCISE_NAME : self.workoutNameTextField.text, EXERCISE_SETS : self.numberOfSetsTextField.text, EXERCISE_REP_MIN : self.repMinTextField.text, EXERCISE_REP_MAX : self.repMaxTextField.text};
     
     return exerciseData;
 }
@@ -93,9 +91,9 @@
     RMExerciseObject *newExerciseData = [[RMExerciseObject alloc] init];
     
     newExerciseData.exerciseName = self.workoutNameTextField.text;
-    newExerciseData.numberOfSets = [self.numberOfSetsTextField.text intValue];
-    newExerciseData.repMinNumber = [self.repMinTextField.text intValue];
-    newExerciseData.repMaxNumber = [self.repMaxTextField.text intValue];
+//    newExerciseData.numberOfSets = [NSNumber numberWithInt:[self.numberOfSetsTextField.text intValue]];
+    newExerciseData.repMin = [self.repMinTextField.text intValue];
+    newExerciseData.repMax = [self.repMaxTextField.text intValue];
      
     return newExerciseData;
 }

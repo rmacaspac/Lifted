@@ -2,7 +2,7 @@
 //  Exercise.h
 //  Lifted
 //
-//  Created by Ryan Macaspac on 6/6/14.
+//  Created by Ryan Macaspac on 6/9/14.
 //  Copyright (c) 2014 Ryan Macaspac. All rights reserved.
 //
 
@@ -13,18 +13,18 @@
 
 @interface Exercise : NSManagedObject
 
-@property (nonatomic, retain) NSString * exerciseName;
-@property (nonatomic) int16_t repMax;
-@property (nonatomic) int16_t repMin;
-@property (nonatomic, retain) Routine *routine;
-@property (nonatomic, retain) NSMutableSet *numberOfSets;
+@property (nonatomic, retain) NSString * name;
+@property (nonatomic, retain) NSString * repMax;
+@property (nonatomic, retain) NSString * repMin;
+@property (nonatomic, retain) NSSet *sets;
+@property (nonatomic, retain) Routine *routineName;
 @end
 
 @interface Exercise (CoreDataGeneratedAccessors)
 
-- (void)addNumberOfSetsObject:(Sets *)value;
-- (void)removeNumberOfSetsObject:(Sets *)value;
-- (void)addNumberOfSets:(NSMutableSet *)values;
-- (void)removeNumberOfSets:(NSMutableSet *)values;
+- (void)addSetsObject:(Sets *)value;
+- (void)removeSetsObject:(Sets *)value;
+- (void)addSets:(NSSet *)values;
+- (void)removeSets:(NSSet *)values;
 
 @end

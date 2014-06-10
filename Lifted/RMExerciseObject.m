@@ -21,23 +21,13 @@
 {
     self = [super init];
     
-    self.exerciseName = exerciseInfo[WORKOUT_NAME];
-    self.numberOfSets = [exerciseInfo[WORKOUT_SETS] intValue];
-    self.repMinNumber = [exerciseInfo[WORKOUT_REP_MIN] intValue];
-    self.repMaxNumber = [exerciseInfo[WORKOUT_REP_MAX] intValue];
-    self.weightNumber = [exerciseInfo[WORKOUT_WEIGHT] floatValue];
+    self.exerciseName = exerciseInfo[EXERCISE_NAME];
+    self.sets = [exerciseInfo[EXERCISE_SETS] intValue];
+    self.repMin = [exerciseInfo[EXERCISE_REP_MIN] intValue];
+    self.repMax = [exerciseInfo[EXERCISE_REP_MAX] intValue];
     
     return self;
 }
-
-- (NSMutableArray *)exerciseData
-{
-    NSMutableArray *exercise = [[NSMutableArray alloc] initWithObjects:self.exerciseName, self.numberOfSets , self.repMinNumber, self.repMinNumber, self.weightNumber, nil];
-    
-    return exercise;
-}
-
-
 
 
 @end

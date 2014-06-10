@@ -7,16 +7,17 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "Routine.h"
 
 @interface RMExercisesData : NSObject
 
-@property (strong, nonatomic) NSString *exerciseName;
-@property (nonatomic) int numberOfSets;
-@property (nonatomic) int repMinNumber;
-@property (nonatomic) int repMaxNumber;
-@property (nonatomic) float weightNumber;
-@property (strong, nonatomic) NSMutableArray *exerciseData;
+@property (nonatomic, retain) NSString *exerciseName;
+@property (nonatomic) int16_t repMax;
+@property (nonatomic) int16_t repMin;
+@property (nonatomic, retain) Routine *routine;
+@property (nonatomic, retain) NSMutableSet *numberOfSets;
 
+- (id)initWithData:(NSDictionary *)exerciseInfo;
 + (NSMutableArray *)exerciseList;
 
 @end

@@ -22,7 +22,7 @@
 {
     self = [super init];
     
-    self.workoutName = addedExercises[WORKOUT_NAME];
+    self.workoutName = addedExercises[EXERCISE_NAME];
     self.workoutExercises = addedExercises[ROUTINE_EXERCISES];
     
     return self;

@@ -7,23 +7,22 @@
 //
 
 #import "RMSelectExercisesViewController.h"
-#import "RMEditExerciseViewController.h"
+#import "RMExercisesData.h"
 #import "RMCoreDataHelper.h"
-#import "Exercise.h"
-
 
 @interface RMSelectExercisesViewController () <UITableViewDataSource, UITableViewDelegate>
-
-@property (strong, nonatomic) NSMutableArray *exerciseObjects;
-@property (strong, nonatomic) NSMutableArray *selectedExercise;
-@property (strong, nonatomic) RMExerciseObject *exercises;
-@property (strong, nonatomic) Routine *routine;
 
 @property (strong, nonatomic) IBOutlet UITableView *exercisesTableView;
 
 @end
 
 @implementation RMSelectExercisesViewController
+
+- (NSMutableArray *)exerciseObject
+{
+    if (!_exerciseObject) _exerciseObject = [[NSMutableArray alloc] init];
+    return _exerciseObject;
+}
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -41,6 +40,13 @@
     
     self.exercisesTableView.delegate = self;
     self.exercisesTableView.dataSource = self;
+    
+    // Enumerating through exerciseList for dictionary objects
+    for (NSMutableDictionary *exercise in [RMExercisesData exerciseList]) {
+        RMExerciseObject *exerciseObjects = [[RMExerciseObject alloc] initWithData:exercise];
+        [self.exerciseObject addObject:exerciseObjects];
+    }
+    NSLog(@"Exercise data is %@", self.exerciseObject);
 }
 
 - (void)didReceiveMemoryWarning
@@ -57,22 +63,21 @@
     static NSString *cellIdentifier = @"Cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
     
-    cell.textLabel.text = [RMExercisesData exerciseList][indexPath.row][WORKOUT_NAME];
+    cell.textLabel.text = [self.exerciseObject valueForKey:EXERCISE_NAME][indexPath.row];
     
     return cell;
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [[RMExercisesData exerciseList] count];
+    return [self.exerciseObject count];
 }
 
 #pragma mark - UITableView Delegate
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-
-    [self.delegate didSelectExercise:[RMExercisesData exerciseList][indexPath.row]];
+    [self.delegate didSelectExercise:self.exerciseObject[indexPath.row]];
     [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -80,36 +85,5 @@
 {
     return YES;
 }
-
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    if ([segue.destinationViewController isKindOfClass:[RMEditExerciseViewController class]]) {
-        RMEditExerciseViewController *editExerciseVC = segue.destinationViewController;
-        editExerciseVC.delegate = self;
-    }
-}
-
-
-#pragma mark - RMEditExerciseViewController Delegate
-
-- (void)didChangeData:(RMExerciseObject *)editedExerciseObject
-{
-    self.exercises = editedExerciseObject;
-    NSLog(@"new exercise object is %@", self.exercises);
-}
- */
-
-
-
-
-
-
-
-
 
 @end

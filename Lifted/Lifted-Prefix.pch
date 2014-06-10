@@ -15,12 +15,12 @@
     #import <CoreData/CoreData.h>
     #import <Foundation/Foundation.h>
 
-#define ROUTINE_NAME @"routineName"
+#define ROUTINE_NAME @"name"
 #define ROUTINE_EXERCISES @"exercises"
-#define WORKOUT_NAME @"workoutName"
-#define WORKOUT_REP_MIN @"workoutRepMin"
-#define WORKOUT_REP_MAX @"workoutRepMax"
-#define WORKOUT_WEIGHT @"workoutWeight"
-#define WORKOUT_SETS @"workoutSets"
+#define EXERCISE_NAME @"exerciseName"
+#define EXERCISE_REP_MIN @"repMin"
+#define EXERCISE_REP_MAX @"repMax"
+#define EXERCISE_WEIGHT @"exerciseWeight"
+#define EXERCISE_SETS @"exerciseSets"
 
 #endif

@@ -13,5 +13,6 @@
 @interface RMWorkoutRoutineViewController : UIViewController
 
 @property (strong, nonatomic) Routine *routine;
+@property (strong, nonatomic) NSMutableArray *routineExercises;
 
 @end
