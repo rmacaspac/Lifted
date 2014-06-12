@@ -46,7 +46,6 @@
         RMExerciseObject *exerciseObjects = [[RMExerciseObject alloc] initWithData:exercise];
         [self.exerciseObject addObject:exerciseObjects];
     }
-    NSLog(@"Exercise data is %@", self.exerciseObject);
 }
 
 - (void)didReceiveMemoryWarning
@@ -77,8 +76,10 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [self.delegate didSelectExercise:self.exerciseObject[indexPath.row]];
+    RMExerciseObject *exercise = self.exerciseObject[indexPath.row];
+    [self.delegate didSelectExercise:exercise];
     [self.navigationController popViewControllerAnimated:YES];
+    NSLog(@"Exercise object selected is %@", exercise);
 }
 
 - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath

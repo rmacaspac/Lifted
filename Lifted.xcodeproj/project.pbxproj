@@ -180,6 +180,8 @@
 			children = (
 				26E632F3193F8AEC00EA92AE /* RMExercisesData.h */,
 				26E632F4193F8AEC00EA92AE /* RMExercisesData.m */,
+				269B8F7F19396CDB00D22A8A /* RMExerciseObject.h */,
+				269B8F8019396CDB00D22A8A /* RMExerciseObject.m */,
 				269B8F7919395A6900D22A8A /* Models */,
 				26E632E9193DA96000EA92AE /* arnold.jpg */,
 				269B8F3D1939534400D22A8A /* Lifted-Info.plist */,
@@ -211,8 +213,6 @@
 		269B8F7919395A6900D22A8A /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				269B8F7F19396CDB00D22A8A /* RMExerciseObject.h */,
-				269B8F8019396CDB00D22A8A /* RMExerciseObject.m */,
 				26E632E6193D653400EA92AE /* RMWorkoutObject.h */,
 				26E632E7193D653400EA92AE /* RMWorkoutObject.m */,
 			);

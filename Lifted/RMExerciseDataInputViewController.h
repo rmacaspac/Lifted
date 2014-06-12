@@ -7,9 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Exercise.h"
 
 @interface RMExerciseDataInputViewController : UIViewController
 
 @property (strong, nonatomic) NSMutableArray *exerciseData;
+@property (strong, nonatomic) Exercise *selectedExercise;
 
 @end

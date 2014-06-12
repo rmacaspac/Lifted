@@ -12,7 +12,7 @@
 
 @protocol RMSelectExercisesViewControllerDelegate <NSObject>
 
-- (void)didSelectExercise:(NSMutableArray *)selectedExercise;
+- (void)didSelectExercise:(RMExerciseObject *)selectedExercise;
 
 @end
 
@@ -21,6 +21,5 @@
 @property (weak, nonatomic) id <RMSelectExercisesViewControllerDelegate> delegate;
 
 @property (strong, nonatomic) NSMutableArray *exerciseObject;
-@property (strong, nonatomic) Exercise *exercise;
 
 @end

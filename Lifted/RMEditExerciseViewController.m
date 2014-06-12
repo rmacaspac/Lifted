@@ -7,7 +7,8 @@
 //
 
 #import "RMEditExerciseViewController.h"
-#import "RMExerciseObject.h"
+#import "Routine.h"
+#import "RMCoreDataHelper.h"
 
 @interface RMEditExerciseViewController ()
 
@@ -17,11 +18,17 @@
 @property (strong, nonatomic) IBOutlet UITextField *repMaxTextField;
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *doneBarButtonItem;
 
-@property (strong, nonatomic) RMExerciseObject *editedExerciseObject;
-
 @end
 
 @implementation RMEditExerciseViewController
+
+- (NSMutableArray *)exerciseData
+{
+    if (!_exerciseData) {
+        _exerciseData = [[NSMutableArray alloc] init];
+    }
+    return _exerciseData;
+}
 
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -38,11 +45,22 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    self.workoutNameTextField.text = [self.exerciseData valueForKey:EXERCISE_NAME];
-    self.numberOfSetsTextField.text = [NSString stringWithFormat:@"%@", [self.exerciseData valueForKey:EXERCISE_SETS]];
-    self.repMinTextField.text = [NSString stringWithFormat:@"%@", [self.exerciseData valueForKey:EXERCISE_REP_MIN]];
-    self.repMaxTextField.text = [NSString stringWithFormat:@"%@", [self.exerciseData valueForKey:EXERCISE_REP_MAX]];
+}
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+//    [self.exerciseData addObject:self.selectedExercise];
+//    NSLog(@"Exercise data is %@", self.exerciseData);
+    
+//    NSIndexPath *path;
+    self.workoutNameTextField.text = [self.selectedExercise valueForKey:@"exerciseName"];
+    self.repMinTextField.text = [NSString stringWithFormat:@"%@", [self.selectedExercise valueForKey:@"repMin"]];
+    self.repMaxTextField.text = [NSString stringWithFormat:@"%@", [self.selectedExercise valueForKey:@"repMax"]];
+    
+    NSLog(@"Index path is %i", self.selectedIndexPath);
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -52,50 +70,36 @@
 }
 
 
-
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+ {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ 
 
 #pragma mark - IBActions
 
 - (IBAction)doneBarButtonItemPressed:(UIBarButtonItem *)sender
 {
-    [self.delegate didChangeData:[self editedExerciseObject]];
-    NSLog(@"edited exercise object is %@", [self editedExerciseObject]);
+    [self.delegate didChangeData:[self newExerciseObject] underIndexPath:self.selectedIndexPath];
+    NSLog(@"Edited exercise data is %@", [self newExerciseObject]);
     [self.navigationController popViewControllerAnimated:YES];
 }
 
 #pragma mark - Helper Methods
 
 
-- (NSDictionary *)newExerciseDataAsPropertyLists
+- (RMExerciseObject *)newExerciseObject
 {
-    NSDictionary *exerciseData = @{EXERCISE_NAME : self.workoutNameTextField.text, EXERCISE_SETS : self.numberOfSetsTextField.text, EXERCISE_REP_MIN : self.repMinTextField.text, EXERCISE_REP_MAX : self.repMaxTextField.text};
+    NSDictionary *exerciseDataAsPropertyLists = @{EXERCISE_NAME : self.workoutNameTextField.text, EXERCISE_SETS : [self.selectedExercise valueForKey:@"sets"], EXERCISE_REP_MIN : self.repMinTextField.text, EXERCISE_REP_MAX : self.repMaxTextField.text};
     
-    return exerciseData;
-}
-
-
-                                  
-- (RMExerciseObject *)editedExerciseData
-{
-    RMExerciseObject *newExerciseData = [[RMExerciseObject alloc] init];
+    RMExerciseObject *newExerciseObject = [[RMExerciseObject alloc] initWithData:exerciseDataAsPropertyLists];
     
-    newExerciseData.exerciseName = self.workoutNameTextField.text;
-//    newExerciseData.numberOfSets = [NSNumber numberWithInt:[self.numberOfSetsTextField.text intValue]];
-    newExerciseData.repMin = [self.repMinTextField.text intValue];
-    newExerciseData.repMax = [self.repMaxTextField.text intValue];
-     
-    return newExerciseData;
+    return newExerciseObject;
+    
 }
 
 @end

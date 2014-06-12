@@ -44,8 +44,7 @@
     self.workoutRoutineTableView.delegate = self;
     
     self.navigationItem.title = [self.routine valueForKey:@"name"];
-    
-    NSLog(@"workout exercises %@", self.routine);
+
     [self orderRoutineExercises];
     
 }

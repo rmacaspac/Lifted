@@ -9,6 +9,7 @@
 #import "RMExerciseDataInputViewController.h"
 #import "RMExerciseObject.h"
 #import "RMExerciseDataInputTableViewCell.h"
+#import "Routine.h"
 
 @interface RMExerciseDataInputViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -91,10 +92,6 @@
     return 2;
 }
 
-
-
-
-
 /*
 #pragma mark - Navigation
 
@@ -106,15 +103,9 @@
 }
 */
 
-/*
-#pragma mark - Helper Method
 
-- (NSDictionary *)individualExercise:(NSString *)workoutName with:(int)workoutReps andWith:(int)workoutWeight
-{
-    NSDictionary *individualExerciseData = @{WORKOUT_NAME : workoutName, WORKOUT_REPS : [NSNumber numberWithInt:workoutReps], WORKOUT_WEIGHT : [NSNumber numberWithInt:workoutWeight]};
-    
-    return individualExerciseData;
-}
-*/
+
+
+
 
 @end

@@ -18,6 +18,7 @@
 @property (nonatomic, retain) NSString * repMin;
 @property (nonatomic, retain) NSSet *sets;
 @property (nonatomic, retain) Routine *routineName;
+
 @end
 
 @interface Exercise (CoreDataGeneratedAccessors)

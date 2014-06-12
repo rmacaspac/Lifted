@@ -20,7 +20,6 @@
 @property (strong, nonatomic) IBOutlet UIButton *finishButton;
 @property (strong, nonatomic) IBOutlet UIButton *addWorkoutButton;
 
-
 @end
 
 @implementation RMAddWorkoutViewController
@@ -48,15 +47,26 @@
     self.exercisesTableView.delegate = self;
     self.exercisesTableView.dataSource = self;
     self.workoutNameTextField.delegate = self;
-    
-    [self saveRoutine];
 }
-
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - IBActions
+
+- (IBAction)cancelButtonPressed:(UIButton *)sender
+{
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (IBAction)finishButtonPressed:(UIButton *)sender
+{
+    [self saveRoutineWithExercises];
+    [self.delegate didAddWorkout:self.routine];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 #pragma mark - Navigation
@@ -68,13 +78,12 @@
         selectExerciseVC.delegate = self;
     }
     
-    if ([sender isKindOfClass:[NSIndexPath class]]) {
-        if ([segue.identifier isEqualToString:@"exercisesToEditExercisesSegue"]) {
-            if ([segue.destinationViewController isKindOfClass:[RMEditExerciseViewController class]]) {
-                RMEditExerciseViewController *editExerciseVC = segue.destinationViewController;
-                NSIndexPath *indexPath = sender;
-                editExerciseVC.exerciseData = [RMExercisesData exerciseList][indexPath.row];
-            }
+    if ([segue.identifier isEqualToString:@"exercisesToEditExercisesSegue"]) {
+        if ([segue.destinationViewController isKindOfClass:[RMEditExerciseViewController class]]) {
+            RMEditExerciseViewController *editExerciseVC = segue.destinationViewController;
+            NSIndexPath *indexPath = sender;
+            editExerciseVC.selectedIndexPath = indexPath.row;
+            editExerciseVC.selectedExercise = self.exerciseData[indexPath.row];
         }
     }
     if ([segue.destinationViewController isKindOfClass:[RMEditExerciseViewController class]]) {
@@ -93,8 +102,8 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
     
     if ([self.exerciseData count] > 0 && indexPath.section == 0) {
-        Exercise *selectedExercise = self.exerciseData[indexPath.row];
-        cell.textLabel.text = selectedExercise.name;
+        RMExerciseObject *selectedExercise = self.exerciseData[indexPath.row];
+        cell.textLabel.text = [selectedExercise valueForKey:@"exerciseName"];
         cell.accessoryType = UITableViewCellAccessoryDetailDisclosureButton;
     } else {
         cell.textLabel.text = @"Add Exercise";
@@ -119,9 +128,7 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.section == 0) {
-        [self performSegueWithIdentifier:@"addWorkoutToSelectExerciseSegue" sender:indexPath];
-    } else {
+    if (indexPath.section == 1) {
         [self performSegueWithIdentifier:@"addWorkoutToSelectExerciseSegue" sender:indexPath];
     }
 }
@@ -131,67 +138,63 @@
     [self performSegueWithIdentifier:@"exercisesToEditExercisesSegue" sender:indexPath];
 }
 
-#pragma mark - IBActions
-
-- (IBAction)cancelButtonPressed:(UIButton *)sender
-{
-    [self.navigationController popViewControllerAnimated:YES];
-}
-
-- (IBAction)finishButtonPressed:(UIButton *)sender
-{
-    [self.delegate didAddWorkout:self.routine];
-    [self.navigationController popViewControllerAnimated:YES];
-}
 
 #pragma mark - RMSelectExercisesViewController Delegate
 
-- (void)didSelectExercise:(NSMutableArray *)selectedExercise;
+- (void)didSelectExercise:(RMExerciseObject *)selectedExercise;
 {
-    [self.exerciseData addObject:[self saveSelectedExercise:selectedExercise]];
+    [self.exerciseData addObject:selectedExercise];
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:[self.exerciseData count] - 1 inSection:0];
     [self.exercisesTableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    
-    NSLog(@"Array with new exercise %@", self.exerciseData);
-    
+    [self.exercisesTableView reloadData];
+}
+
+#pragma mark - RMEditExerciseViewController Delegate
+- (void)didChangeData:(RMExerciseObject *)editedExerciseObject underIndexPath:(NSInteger)indexPathRow
+{
+        [self.exerciseData removeObjectAtIndex:indexPathRow];
+        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:indexPathRow inSection:0];
+        [self.exercisesTableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+        [self.exerciseData insertObject:editedExerciseObject atIndex:indexPathRow];
+        [self.exercisesTableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+        [self.exercisesTableView reloadData];
 }
 
 #pragma mark - Helper Methods
 
 
-- (Exercise *)saveSelectedExercise:(NSMutableArray *)selectedExercise
+- (void)saveRoutineWithExercises
 {
-    // Saving exercise name under routine using Core Data
-    NSManagedObjectContext *context = [RMCoreDataHelper managedObjectContext];
-    
-    Exercise *exercise = [NSEntityDescription insertNewObjectForEntityForName:@"Exercise" inManagedObjectContext:context];
-    exercise.name = [NSString stringWithFormat:@"%@", [selectedExercise valueForKey:EXERCISE_NAME]];
-    exercise.repMin = [NSString stringWithFormat:@"%@",[selectedExercise valueForKey:EXERCISE_REP_MIN]];
-    exercise.repMax = [NSString stringWithFormat:@"%@",[selectedExercise valueForKey:EXERCISE_REP_MAX]];
-    exercise.routineName = self.routine;
-    exercise.routineName.name = self.workoutNameTextField.text;
-    exercise.routineName.date = [NSDate date];
-    
-    NSError *error = nil;
-    if (![[exercise managedObjectContext] save:&error]) {
-        NSLog(@"%@", error);
-    }
-    return exercise;
-}
-
-
-- (void)saveRoutine
-{
-    // Saving exercise name under routine using Core Data
     NSManagedObjectContext *context = [RMCoreDataHelper managedObjectContext];
     
     self.routine = [NSEntityDescription insertNewObjectForEntityForName:@"Routine" inManagedObjectContext:context];
+    self.routine.name = self.workoutNameTextField.text;
+    self.routine.date = [NSDate date];
     
     NSError *error = nil;
     if (![[self.routine managedObjectContext] save:&error]) {
         NSLog(@"%@", error);
     }
+    
+    for (Exercise *exerciseInfo in self.exerciseData) {
+        // Saving exercise name under routine using Core Data
+        NSManagedObjectContext *context = [RMCoreDataHelper managedObjectContext];
+        
+        Exercise *exercise = [NSEntityDescription insertNewObjectForEntityForName:@"Exercise" inManagedObjectContext:context];
+        exercise.name = [NSString stringWithFormat:@"%@", [exerciseInfo valueForKey:EXERCISE_NAME]];
+        exercise.repMin = [NSString stringWithFormat:@"%@",[exerciseInfo valueForKey:EXERCISE_REP_MIN]];
+        exercise.repMax = [NSString stringWithFormat:@"%@",[exerciseInfo valueForKey:EXERCISE_REP_MAX]];
+        exercise.routineName = self.routine;
+        exercise.routineName.name = self.workoutNameTextField.text;
+        exercise.routineName.date = [NSDate date];
+        
+        NSError *error = nil;
+        if (![[exercise managedObjectContext] save:&error]) {
+            NSLog(@"%@", error);
+        }
+    }
 }
+
 
 
 #pragma mark - UITextField Delegate
@@ -203,12 +206,7 @@
 }
 
 
-#pragma mark - RMEditExerciseViewController Delegate
 
-- (void)didChangeData:(RMExerciseObject *)editedExerciseObject
-{
-
-}
 
 
 

@@ -55,8 +55,6 @@
 {
     [super viewWillAppear:animated];
     [self fetchRoutine];
-    
-    NSLog(@"Routine Info is %@", self.routineExercises);
 }
 
 - (void)didReceiveMemoryWarning

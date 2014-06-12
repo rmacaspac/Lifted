@@ -7,17 +7,21 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Exercise.h"
 #import "RMExerciseObject.h"
 
 @protocol RMEditExerciseViewControllerDelegate <NSObject>
 
--(void)didChangeData:(RMExerciseObject *)editedExerciseObject;
+-(void)didChangeData:(RMExerciseObject *)editedExerciseObject underIndexPath:(NSInteger)indexPathRow;
 
 @end
 
 @interface RMEditExerciseViewController : UIViewController
 
 @property (weak) id <RMEditExerciseViewControllerDelegate> delegate;
+
 @property (strong, nonatomic) NSMutableArray *exerciseData;
+@property (strong, nonatomic) RMExerciseObject *selectedExercise;
+@property (nonatomic) NSInteger selectedIndexPath;
 
 @end
