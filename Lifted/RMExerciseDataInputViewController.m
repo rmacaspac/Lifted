@@ -7,9 +7,6 @@
 //
 
 #import "RMExerciseDataInputViewController.h"
-#import "RMExerciseObject.h"
-#import "RMExerciseDataInputTableViewCell.h"
-#import "Routine.h"
 
 @interface RMExerciseDataInputViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -19,10 +16,20 @@
 @property (strong, nonatomic) IBOutlet UILabel *repMaxLabel;
 @property (strong, nonatomic) IBOutlet UILabel *dateLabel;
 
+@property (strong, nonatomic) NSArray *workoutDataOnRow;
+@property (strong, nonatomic) NSMutableArray *workoutData;
 
 @end
 
 @implementation RMExerciseDataInputViewController
+
+- (NSMutableArray *)workoutData
+{
+    if (!_workoutData) {
+        _workoutData = [[NSMutableArray alloc] init];
+    }
+    return _workoutData;
+}
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -41,7 +48,6 @@
     self.workoutTableView.dataSource = self;
     self.workoutTableView.delegate = self;
     
-    
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
     self.dateLabel.text = [dateFormatter stringFromDate:[NSDate date]];
@@ -51,7 +57,7 @@
     self.repMinLabel.text = [NSString stringWithFormat:@"%@",[self.exerciseData valueForKey:EXERCISE_REP_MIN]];
     self.repMaxLabel.text = [NSString stringWithFormat:@"%@",[self.exerciseData valueForKey:EXERCISE_REP_MAX]];
     
-    NSLog(@"the exercises data for routine is %@", self.exerciseData);
+    NSLog(@"the exercises data for routine is %@", self.workoutData);
 }
 
 - (void)didReceiveMemoryWarning
@@ -60,16 +66,25 @@
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark - IBActions
+
+- (IBAction)finishBarButtonItemPressed:(UIBarButtonItem *)sender
+{
+    
+}
+
 #pragma mark - UITableView Data Source
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *cellIdentifier = @"Cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
+    RMExerciseDataInputTableViewCell *cell = [self.workoutTableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
+    cell.delegate = self;
     
-    RMExerciseDataInputTableViewCell *tableViewCell = [[RMExerciseDataInputTableViewCell alloc] init];
-    tableViewCell.numberOfRepsTextField.text = nil;
-    if (indexPath.section == 1) {
+    if (indexPath.section == 0) {
+        cell.numberOfRepsTextField.text = nil;
+        cell.weightTextField.text = nil;
+    } else {
         cell.textLabel.font = [UIFont fontWithName:@"Arial Hebrew" size:14.0];
         cell.textLabel.text = @"Add Set";
     }
@@ -92,20 +107,19 @@
     return 2;
 }
 
-/*
-#pragma mark - Navigation
+#pragma mark - UITableView Delegate
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+- (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+
 }
-*/
 
+#pragma mark - RMExerciseDataInputTableViewCell Delegate
 
-
-
-
+-(void)didEnterData:(NSArray *)dataEntered
+{
+    self.workoutDataOnRow = dataEntered;
+    NSLog(@"the row data for routine is %@", self.workoutDataOnRow);
+}
 
 @end

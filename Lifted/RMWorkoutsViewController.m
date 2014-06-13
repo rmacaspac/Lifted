@@ -15,10 +15,10 @@
 
 @interface RMWorkoutsViewController () <UITableViewDataSource, UITableViewDelegate, RMAddWorkoutViewControllerDelegate>
 
-@property (strong, nonatomic) NSMutableArray *routineExercises;
-
 @property (strong, nonatomic) NSString *workoutName;
 @property (strong, nonatomic) IBOutlet UITableView *workoutsTableView;
+
+@property (strong, nonatomic) NSMutableArray *routineExercises;
 
 @end
 
@@ -48,7 +48,6 @@
     
     self.workoutsTableView.dataSource = self;
     self.workoutsTableView.delegate = self;
-    
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -72,7 +71,7 @@
         cell.textLabel.text = [self.routineExercises[indexPath.row] valueForKey:@"name"];
         }
     else if (indexPath.section == 1) {
-        cell.textLabel.text = @"Add Workout";
+        cell.textLabel.text = @"Create New Workout";
     }
     
     return cell;
@@ -112,7 +111,6 @@
         RMAddWorkoutViewController *addWorkoutVC = segue.destinationViewController;
         addWorkoutVC.delegate = self;
     }
-    
     if ([sender isKindOfClass:[NSIndexPath class]]) {
         if ([segue.identifier isEqualToString:@"workoutsToRoutineSegue"]) {
             if ([segue.destinationViewController isKindOfClass:[RMWorkoutRoutineViewController class]]) {
@@ -136,8 +134,7 @@
 
 - (void)fetchRoutine
 {
-    // Querying Album object using Core Data
-    
+    // Querying Album object using Core Data and adding objects to routineExercises array
     NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"Routine"];
     fetchRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES]];
     

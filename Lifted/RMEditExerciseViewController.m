@@ -50,17 +50,12 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    
-//    [self.exerciseData addObject:self.selectedExercise];
-//    NSLog(@"Exercise data is %@", self.exerciseData);
-    
-//    NSIndexPath *path;
+
     self.workoutNameTextField.text = [self.selectedExercise valueForKey:@"exerciseName"];
     self.repMinTextField.text = [NSString stringWithFormat:@"%@", [self.selectedExercise valueForKey:@"repMin"]];
     self.repMaxTextField.text = [NSString stringWithFormat:@"%@", [self.selectedExercise valueForKey:@"repMax"]];
     
     NSLog(@"Index path is %i", self.selectedIndexPath);
-    
 }
 
 - (void)didReceiveMemoryWarning
@@ -68,7 +63,6 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
 
  #pragma mark - Navigation
  
@@ -78,19 +72,16 @@
  // Get the new view controller using [segue destinationViewController].
  // Pass the selected object to the new view controller.
  }
- 
 
 #pragma mark - IBActions
 
 - (IBAction)doneBarButtonItemPressed:(UIBarButtonItem *)sender
 {
     [self.delegate didChangeData:[self newExerciseObject] underIndexPath:self.selectedIndexPath];
-    NSLog(@"Edited exercise data is %@", [self newExerciseObject]);
     [self.navigationController popViewControllerAnimated:YES];
 }
 
 #pragma mark - Helper Methods
-
 
 - (RMExerciseObject *)newExerciseObject
 {

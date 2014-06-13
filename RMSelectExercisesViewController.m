@@ -8,11 +8,12 @@
 
 #import "RMSelectExercisesViewController.h"
 #import "RMExercisesData.h"
-#import "RMCoreDataHelper.h"
 
 @interface RMSelectExercisesViewController () <UITableViewDataSource, UITableViewDelegate>
 
 @property (strong, nonatomic) IBOutlet UITableView *exercisesTableView;
+
+@property (strong, nonatomic) NSMutableArray *exerciseObject;
 
 @end
 
@@ -41,7 +42,7 @@
     self.exercisesTableView.delegate = self;
     self.exercisesTableView.dataSource = self;
     
-    // Enumerating through exerciseList for dictionary objects
+    // Enumerating through exerciseList in RMExercisesData for dictionary objects
     for (NSMutableDictionary *exercise in [RMExercisesData exerciseList]) {
         RMExerciseObject *exerciseObjects = [[RMExerciseObject alloc] initWithData:exercise];
         [self.exerciseObject addObject:exerciseObjects];

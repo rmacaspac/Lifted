@@ -8,9 +8,19 @@
 
 #import <UIKit/UIKit.h>
 
-@interface RMExerciseDataInputTableViewCell : UITableViewCell
+@protocol RMExerciseDataInputTableViewCellDelegate <NSObject>
+
+- (void)didEnterData:(NSArray *)dataEntered;
+
+@end
+
+@interface RMExerciseDataInputTableViewCell : UITableViewCell <UITextFieldDelegate>
 
 @property (strong, nonatomic) IBOutlet UITextField *numberOfRepsTextField;
 @property (strong, nonatomic) IBOutlet UITextField *weightTextField;
+
+@property (weak, nonatomic) id <RMExerciseDataInputTableViewCellDelegate> delegate;
+
+@property (strong, nonatomic) NSArray *dataEntered;
 
 @end

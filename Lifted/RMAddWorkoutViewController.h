@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "RMWorkoutObject.h"
 #import "Exercise.h"
 
 @protocol RMAddWorkoutViewControllerDelegate <NSObject>
@@ -22,8 +21,5 @@
 
 @property (strong, nonatomic) NSMutableArray *exerciseData;
 @property (strong, nonatomic) Routine *routine;
-
-
-
 
 @end

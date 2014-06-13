@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "Exercise.h"
+#import "RMExerciseDataInputTableViewCell.h"
 
-@interface RMExerciseDataInputViewController : UIViewController
+@interface RMExerciseDataInputViewController : UIViewController <RMExerciseDataInputTableViewCellDelegate>
 
 @property (strong, nonatomic) NSMutableArray *exerciseData;
 @property (strong, nonatomic) Exercise *selectedExercise;

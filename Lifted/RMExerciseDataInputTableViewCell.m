@@ -7,10 +7,11 @@
 //
 
 #import "RMExerciseDataInputTableViewCell.h"
-
-
+#import "RMCoreDataHelper.h"
 
 @implementation RMExerciseDataInputTableViewCell
+
+@synthesize delegate;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
@@ -24,13 +25,34 @@
 - (void)awakeFromNib
 {
     // Initialization code
+    
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
 {
+    
     [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
+    
+    self.numberOfRepsTextField.delegate = self;
+    self.weightTextField.delegate = self;
 }
+
+#pragma mark - IBActions
+
+- (IBAction)repNumberAdded:(UITextField *)sender
+{
+    self.dataEntered = [[NSArray alloc] initWithObjects:self.numberOfRepsTextField.text, self.weightTextField.text, nil];
+    NSLog(@"Rep number entered is %@ and added to array %@", self.numberOfRepsTextField.text, self.dataEntered);
+    [self.delegate didEnterData:self.dataEntered];
+}
+
+- (IBAction)weightNumberAdded:(UITextField *)sender
+{
+    self.dataEntered = [[NSArray alloc] initWithObjects:self.numberOfRepsTextField.text, self.weightTextField.text, nil];
+    NSLog(@"Weight number entered is %@ and added to array %@", self.weightTextField.text, self.dataEntered);
+    [self.delegate didEnterData:self.dataEntered];
+}
+
+
 
 @end

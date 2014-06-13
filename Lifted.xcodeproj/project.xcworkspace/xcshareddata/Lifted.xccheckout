@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>AB63442C-5115-4C08-A73E-6C8E83E5719C</string>
+	<key>IDESourceControlProjectName</key>
+	<string>Lifted</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>1ABE970B-1070-4792-BAE6-BF853325AB98</key>
+		<string>https://github.com/rmacaspac/Lifted.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>Lifted.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>1ABE970B-1070-4792-BAE6-BF853325AB98</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/rmacaspac/Lifted.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>1ABE970B-1070-4792-BAE6-BF853325AB98</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>1ABE970B-1070-4792-BAE6-BF853325AB98</string>
+			<key>IDESourceControlWCCName</key>
+			<string>Lifted</string>
+		</dict>
+	</array>
+</dict>
+</plist>
