@@ -14,8 +14,8 @@
 @property (nonatomic, retain) NSString *exerciseName;
 @property (nonatomic) int16_t repMax;
 @property (nonatomic) int16_t repMin;
+@property (nonatomic) int16_t numberOfSets;
 @property (nonatomic, retain) Routine *routine;
-@property (nonatomic, retain) NSMutableSet *numberOfSets;
 
 - (id)initWithData:(NSDictionary *)exerciseInfo;
 + (NSMutableArray *)exerciseList;

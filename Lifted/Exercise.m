@@ -2,7 +2,7 @@
 //  Exercise.m
 //  Lifted
 //
-//  Created by Ryan Macaspac on 6/9/14.
+//  Created by Ryan Macaspac on 6/13/14.
 //  Copyright (c) 2014 Ryan Macaspac. All rights reserved.
 //
 
@@ -16,7 +16,8 @@
 @dynamic name;
 @dynamic repMax;
 @dynamic repMin;
+@dynamic numberOfSets;
+@dynamic routine;
 @dynamic sets;
-@dynamic routineName;
 
 @end

@@ -20,7 +20,8 @@
 #define EXERCISE_NAME @"exerciseName"
 #define EXERCISE_REP_MIN @"repMin"
 #define EXERCISE_REP_MAX @"repMax"
-#define EXERCISE_WEIGHT @"exerciseWeight"
-#define EXERCISE_SETS @"exerciseSets"
+#define EXERCISE_SETS @"numberOfSets"
+#define SET_WEIGHT @"weightLifted"
+#define SET_REPS @"numberOfReps"
 
 #endif

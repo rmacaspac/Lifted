@@ -13,8 +13,8 @@
 @property (strong, nonatomic) NSString * exerciseName;
 @property (nonatomic) int repMax;
 @property (nonatomic) int repMin;
-@property (nonatomic) int sets;
-@property (strong, nonatomic) NSMutableSet *numberOfSets;
+@property (nonatomic) int numberOfSets;
+
 
 - (id)initWithData:(NSDictionary *)exerciseInfo;
 

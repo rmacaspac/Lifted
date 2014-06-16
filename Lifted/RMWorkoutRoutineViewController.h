@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "RMWorkoutObject.h"
 #import "Routine.h"
 
 @interface RMWorkoutRoutineViewController : UIViewController

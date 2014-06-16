@@ -2,7 +2,7 @@
 //  Sets.h
 //  Lifted
 //
-//  Created by Ryan Macaspac on 6/9/14.
+//  Created by Ryan Macaspac on 6/13/14.
 //  Copyright (c) 2014 Ryan Macaspac. All rights reserved.
 //
 
@@ -13,9 +13,7 @@
 
 @interface Sets : NSManagedObject
 
-@property (nonatomic, retain) NSString * numberOfReps;
-@property (nonatomic, retain) NSString * numberOfSets;
-@property (nonatomic, retain) NSString * weight;
-@property (nonatomic, retain) Exercise *exerciseName;
+@property (nonatomic, retain) id repsAndWeightLifted;
+@property (nonatomic, retain) Exercise *exercise;
 
 @end

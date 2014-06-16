@@ -90,7 +90,8 @@
             if ([segue.destinationViewController isKindOfClass:[RMExerciseDataInputViewController class]]) {
                 RMExerciseDataInputViewController *exerciseDataInputVC = segue.destinationViewController;
                 NSIndexPath *indexPath = [self.workoutRoutineTableView indexPathForSelectedRow];
-                exerciseDataInputVC.exerciseData = self.routineExercises[indexPath.row];
+                exerciseDataInputVC.selectedExercise = self.routineExercises[indexPath.row];
+                exerciseDataInputVC.selectedRoutine = self.routine;
             }
         }
     }

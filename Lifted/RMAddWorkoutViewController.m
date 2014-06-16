@@ -196,9 +196,10 @@
         exercise.name = [NSString stringWithFormat:@"%@", [exerciseInfo valueForKey:EXERCISE_NAME]];
         exercise.repMin = [NSString stringWithFormat:@"%@",[exerciseInfo valueForKey:EXERCISE_REP_MIN]];
         exercise.repMax = [NSString stringWithFormat:@"%@",[exerciseInfo valueForKey:EXERCISE_REP_MAX]];
-        exercise.routineName = self.routine;
-        exercise.routineName.name = self.workoutNameTextField.text;
-        exercise.routineName.date = [NSDate date];
+        exercise.numberOfSets = [NSString stringWithFormat:@"%@",[exerciseInfo valueForKey:EXERCISE_SETS]];
+        exercise.routine = self.routine;
+        exercise.routine.name = self.workoutNameTextField.text;
+        exercise.routine.date = [NSDate date];
         
         NSError *error = nil;
         if (![[exercise managedObjectContext] save:&error]) {

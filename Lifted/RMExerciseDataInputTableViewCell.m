@@ -17,7 +17,18 @@
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-        // Initialization code
+        
+//        //Fetching array from file system using Core Data
+//        NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"Exercise"];
+//        fetchRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"sets" ascending:NO]];
+//        
+//        NSError *error = nil;
+//        
+//        NSArray *fetchedRoutines = [[RMCoreDataHelper managedObjectContext] executeFetchRequest:fetchRequest error:&error];
+//        
+//        self.previousWeightLabel.text = [NSString stringWithFormat:@"%@", fetchedRoutines[0]];
+//        
+//        NSLog(@"data saved is %@", fetchedRoutines);
     }
     return self;
 }
@@ -39,20 +50,27 @@
 
 #pragma mark - IBActions
 
-- (IBAction)repNumberAdded:(UITextField *)sender
-{
-    self.dataEntered = [[NSArray alloc] initWithObjects:self.numberOfRepsTextField.text, self.weightTextField.text, nil];
-    NSLog(@"Rep number entered is %@ and added to array %@", self.numberOfRepsTextField.text, self.dataEntered);
-    [self.delegate didEnterData:self.dataEntered];
-}
 
 - (IBAction)weightNumberAdded:(UITextField *)sender
 {
-    self.dataEntered = [[NSArray alloc] initWithObjects:self.numberOfRepsTextField.text, self.weightTextField.text, nil];
-    NSLog(@"Weight number entered is %@ and added to array %@", self.weightTextField.text, self.dataEntered);
-    [self.delegate didEnterData:self.dataEntered];
+    NSLog(@"Text in text field is %@", self.numberOfRepsTextField.text);
+    if (self.weightTextField.text.length > 0) {
+        [self.delegate didEnterData:self.numberOfRepsTextField.text and:self.weightTextField.text];
+    }
 }
 
+
+/*
+- (IBAction)repNumberAdded:(UITextField *)sender
+{
+    if (self.numberOfRepsTextField.text.length > 0 && self.weightTextField.text.length > 0) {
+        NSArray *repDataEntered = [[NSArray alloc] initWithObjects:self.numberOfRepsTextField.text, self.weightTextField.text, nil];
+        [self.delegate didEnterData:repDataEntered];
+    } else if ([self.numberOfRepsTextField.text stringByTrimmingCharactersInSet:[NSCharacterSet decimalDigitCharacterSet]] != nil) {
+        NSLog(@"nothing saved");
+    }
+}
+ */
 
 
 @end

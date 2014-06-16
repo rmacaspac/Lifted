@@ -51,9 +51,10 @@
 {
     [super viewWillAppear:animated];
 
-    self.workoutNameTextField.text = [self.selectedExercise valueForKey:@"exerciseName"];
-    self.repMinTextField.text = [NSString stringWithFormat:@"%@", [self.selectedExercise valueForKey:@"repMin"]];
-    self.repMaxTextField.text = [NSString stringWithFormat:@"%@", [self.selectedExercise valueForKey:@"repMax"]];
+    self.workoutNameTextField.text = [self.selectedExercise valueForKey:EXERCISE_NAME];
+    self.numberOfSetsTextField.text = [NSString stringWithFormat:@"%@", [self.selectedExercise valueForKey:EXERCISE_SETS]];
+    self.repMinTextField.text = [NSString stringWithFormat:@"%@", [self.selectedExercise valueForKey:EXERCISE_REP_MIN]];
+    self.repMaxTextField.text = [NSString stringWithFormat:@"%@", [self.selectedExercise valueForKey:EXERCISE_REP_MAX]];
     
     NSLog(@"Index path is %i", self.selectedIndexPath);
 }
@@ -85,7 +86,7 @@
 
 - (RMExerciseObject *)newExerciseObject
 {
-    NSDictionary *exerciseDataAsPropertyLists = @{EXERCISE_NAME : self.workoutNameTextField.text, EXERCISE_SETS : [self.selectedExercise valueForKey:@"sets"], EXERCISE_REP_MIN : self.repMinTextField.text, EXERCISE_REP_MAX : self.repMaxTextField.text};
+    NSDictionary *exerciseDataAsPropertyLists = @{EXERCISE_NAME : self.workoutNameTextField.text, EXERCISE_SETS : self.numberOfSetsTextField.text, EXERCISE_REP_MIN : self.repMinTextField.text, EXERCISE_REP_MAX : self.repMaxTextField.text};
     
     RMExerciseObject *newExerciseObject = [[RMExerciseObject alloc] initWithData:exerciseDataAsPropertyLists];
     
