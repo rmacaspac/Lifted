@@ -12,6 +12,7 @@
 @interface RMWorkoutRoutineViewController () <UITableViewDataSource, UITableViewDelegate>
 
 @property (strong, nonatomic) IBOutlet UITableView *workoutRoutineTableView;
+@property (strong, nonatomic) IBOutlet UILabel *dateLabel;
 
 @end
 
@@ -43,6 +44,10 @@
     self.workoutRoutineTableView.delegate = self;
     
     self.navigationItem.title = [self.routine valueForKey:@"name"];
+    
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
+    self.dateLabel.text = [dateFormatter stringFromDate:[NSDate date]];
 
     [self orderRoutineExercises];
     
@@ -76,6 +81,11 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [self performSegueWithIdentifier:@"routineToDataInputSegue" sender:indexPath];
+}
+
+- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return YES;
 }
 
 

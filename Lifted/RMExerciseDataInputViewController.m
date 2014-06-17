@@ -50,10 +50,7 @@
     
     self.workoutTableView.dataSource = self;
     self.workoutTableView.delegate = self;
-    
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
-    self.dateLabel.text = [dateFormatter stringFromDate:[NSDate date]];
+    self.workoutTableView.scrollEnabled = NO;
     
     self.exerciseNameLabel.text = [self.selectedExercise valueForKey:@"name"];
     self.repMinLabel.text = [NSString stringWithFormat:@"%@",[self.selectedExercise valueForKey:EXERCISE_REP_MIN]];
@@ -76,6 +73,13 @@
     NSArray *fetchedWorkoutData = [context executeFetchRequest:fetchRequest error:&error];
     
     self.workoutData = [fetchedWorkoutData mutableCopy];
+    
+    UIView *header = [[UIView alloc] initWithFrame:CGRectMake(0, 40, 1, 1)];
+	header.backgroundColor = [UIColor lightGrayColor];
+    self.workoutTableView.tableHeaderView = header;
+    UIView *footer = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 1, 1)];
+	footer.backgroundColor = [UIColor lightGrayColor];
+	self.workoutTableView.tableFooterView = footer;
 }
 
 - (void)didReceiveMemoryWarning
@@ -128,6 +132,7 @@
 {
     static NSString *cellIdentifier = @"Cell";
     RMExerciseDataInputTableViewCell *cell = [self.workoutTableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
+    
     cell.delegate = self;
     cell.numberOfRepsTextField.tag = indexPath.row;
     cell.weightTextField.tag = indexPath.row;
@@ -137,10 +142,11 @@
         NSString *repNumber = [[[[self.workoutData valueForKey:@"repsAndWeightLifted"] objectAtIndex:0] objectAtIndex:indexPath.row] objectAtIndex:0];
         NSString *weightNumber = [[[[self.workoutData valueForKey:@"repsAndWeightLifted"] objectAtIndex:0] objectAtIndex:indexPath.row] objectAtIndex:1];
         cell.previousWeightLabel.text = [NSString stringWithFormat:@"%@ x %@", repNumber, weightNumber];
-        
+
     } else if (indexPath.section == 1) {
         cell.textLabel.font = [UIFont fontWithName:@"Arial Hebrew" size:14.0];
         cell.textLabel.text = @"Add Set";
+        cell.backgroundColor = [UIColor cyanColor];
     }
     
     return cell;
@@ -168,8 +174,8 @@
         int row = [[self.selectedExercise valueForKey:EXERCISE_SETS] intValue];
         NSString *newRowString = [NSString stringWithFormat:@"%i", row + 1];
         [self newNumberOfSets:newRowString];
-        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:row - 1 inSection:0];
-        [self.workoutTableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:row inSection:0];
+        [self.workoutTableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
     }
 }
 
@@ -181,6 +187,11 @@
     [self newNumberOfSets:newRowString];
     [self.workoutTableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
     }
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 40.0;
 }
 
 #pragma mark - RMExerciseDataInputTableViewCell Delegate
@@ -217,5 +228,14 @@
             NSLog(@"%@", error);
         }
 }
+
+- (void)tableViewHeight
+{
+    CGFloat cellHeight = self.workoutTableView.rowHeight;
+    float height = cellHeight * 3;
+    self.workoutTableView.clipsToBounds = YES;
+    self.workoutTableView.frame = CGRectMake(22, 22, self.workoutTableView.frame.size.width, height);
+}
+
 
 @end
