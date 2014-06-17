@@ -58,6 +58,8 @@
     self.exerciseNameLabel.text = [self.selectedExercise valueForKey:@"name"];
     self.repMinLabel.text = [NSString stringWithFormat:@"%@",[self.selectedExercise valueForKey:EXERCISE_REP_MIN]];
     self.repMaxLabel.text = [NSString stringWithFormat:@"%@",[self.selectedExercise valueForKey:EXERCISE_REP_MAX]];
+    
+    NSLog(@"selected exercise data is %@", self.selectedExercise);
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -88,14 +90,33 @@
 {
     NSManagedObjectContext *context = [RMCoreDataHelper managedObjectContext];
     
-    Sets *sets = [NSEntityDescription insertNewObjectForEntityForName:@"Set" inManagedObjectContext:context];
-    sets.exercise = self.selectedExercise;
-    sets.repsAndWeightLifted = self.workoutData;
+    // Fetching set data and assigning it to fetchedObject array
+    NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"Set"];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"exercise == %@", self.selectedExercise];
+    [fetchRequest setPredicate:predicate];
+    fetchRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"repsAndWeightLifted" ascending:NO]];
     
     NSError *error = nil;
     
-    if (![[sets managedObjectContext] save:&error]) {
+    NSArray *fetchedObject = [context executeFetchRequest:fetchRequest error:&error];
+    
+    if (error) {
         NSLog(@"%@", error);
+    } else {
+        
+        // Inserting new object to managedObjectContext
+        Sets *sets = [NSEntityDescription insertNewObjectForEntityForName:@"Set" inManagedObjectContext:context];
+        sets.exercise = self.selectedExercise;
+        sets.repsAndWeightLifted = self.workoutData;
+        
+        // Deleting previous set data from fetchedObject
+        for (Sets *setToDelete in fetchedObject) {
+            [context deleteObject:setToDelete];
+        }
+        // Saving changes to managedObjectContext
+        if (![[sets managedObjectContext] save:&error]) {
+            NSLog(@"%@", error);
+        }
     }
     
     [self.navigationController popViewControllerAnimated:YES];
@@ -139,6 +160,29 @@
     return 2;
 }
 
+#pragma mark - UITableView Delegate
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.section == 1) {
+        int row = [[self.selectedExercise valueForKey:EXERCISE_SETS] intValue];
+        NSString *newRowString = [NSString stringWithFormat:@"%i", row + 1];
+        [self newNumberOfSets:newRowString];
+        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:row - 1 inSection:0];
+        [self.workoutTableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+    }
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.section == 0) {
+    int row = [[self.selectedExercise valueForKey:EXERCISE_SETS] intValue];
+    NSString *newRowString = [NSString stringWithFormat:@"%i", row - 1];
+    [self newNumberOfSets:newRowString];
+    [self.workoutTableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+    }
+}
+
 #pragma mark - RMExerciseDataInputTableViewCell Delegate
 
 -(void)didEnterData:(NSString *)repEntered and:(NSString *)weightEntered atIndexPath:(int)row
@@ -150,6 +194,28 @@
         self.rowData = [[NSArray alloc] initWithObjects:repEntered, weightEntered, nil];
         [self.workoutData insertObject:self.rowData atIndex:row];
     }
+}
+
+#pragma mark - Helper Method
+
+- (void)newNumberOfSets:(NSString *)addedNumber
+{
+    NSManagedObjectContext *context = [RMCoreDataHelper managedObjectContext];
+    NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"Exercise"];
+    NSPredicate *exercisePredicate = [NSPredicate predicateWithFormat:@"name == %@", [self.selectedExercise valueForKey:@"name"]];
+    [fetchRequest setPredicate:exercisePredicate];
+
+    NSError *error = nil;
+    
+    NSArray *fetchedExercise = [context executeFetchRequest:fetchRequest error:&error];
+
+    Exercise *exercise = [fetchedExercise objectAtIndex:0];
+        exercise.name = self.selectedExercise.name;
+        exercise.numberOfSets = [NSString stringWithFormat:@"%@", addedNumber];
+    
+    if (![context save:&error]) {
+            NSLog(@"%@", error);
+        }
 }
 
 @end

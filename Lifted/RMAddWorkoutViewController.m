@@ -111,7 +111,6 @@
     if ([self.exerciseData count] > 0 && indexPath.section == 0) {
         RMExerciseObject *selectedExercise = self.exerciseData[indexPath.row];
         cell.textLabel.text = [selectedExercise valueForKey:@"exerciseName"];
-        cell.accessoryType = UITableViewCellAccessoryDetailDisclosureButton;
     } else {
         cell.textLabel.text = @"Add Exercise";
         cell.accessoryType = UITableViewCellAccessoryNone;
@@ -135,16 +134,12 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.section == 1) {
+    if (indexPath.section == 0) {
+        [self performSegueWithIdentifier:@"exercisesToEditExercisesSegue" sender:indexPath];
+    } else {
         [self performSegueWithIdentifier:@"addWorkoutToSelectExerciseSegue" sender:indexPath];
     }
 }
-
-- (void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath
-{
-    [self performSegueWithIdentifier:@"exercisesToEditExercisesSegue" sender:indexPath];
-}
-
 
 #pragma mark - RMSelectExercisesViewController Delegate
 

@@ -95,10 +95,12 @@
     }
 }
 
+#pragma mark - Helper Method
+
 - (void)orderRoutineExercises
 {
     NSSet *unorderedExercises = self.routine.exercises;
-    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES];
+    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"name" ascending:NO];
     NSArray *orderedExercises = [unorderedExercises sortedArrayUsingDescriptors:@[sortDescriptor]];
     self.routineExercises = [orderedExercises mutableCopy];
 }

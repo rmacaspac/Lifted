@@ -69,7 +69,6 @@
     RMExerciseObject *newExerciseObject = [[RMExerciseObject alloc] initWithData:exerciseDataAsPropertyLists];
     
     return newExerciseObject;
-    
 }
 
 @end
