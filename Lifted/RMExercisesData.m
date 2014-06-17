@@ -59,6 +59,12 @@
     return exercises;
 }
 
++ (NSMutableArray *)exerciseType
+{
+    NSMutableArray *exerciseTypes = [[NSMutableArray alloc] initWithObjects:@"Arms", @"Chest", @"Back", @"Shoulders", @"Legs", nil];
+    return exerciseTypes;
+}
+
 
     
 @end

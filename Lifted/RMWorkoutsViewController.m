@@ -47,6 +47,14 @@
     
     self.workoutsTableView.dataSource = self;
     self.workoutsTableView.delegate = self;
+    
+    // Adding Header and Footer to tableView
+    UIView *header = [[UIView alloc] initWithFrame:CGRectMake(0, 40, 1, 1)];
+	header.backgroundColor = [UIColor lightGrayColor];
+	self.workoutsTableView.tableHeaderView = header;
+    UIView *footer = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 1, 1)];
+	footer.backgroundColor = [UIColor lightGrayColor];
+	self.workoutsTableView.tableFooterView = footer;
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -69,8 +77,9 @@
     if ([self.routineExercises count] > 0 && indexPath.section == 0) {
         cell.textLabel.text = [self.routineExercises[indexPath.row] valueForKey:@"name"];
         }
-    else if (indexPath.section == 1) {
+    else {
         cell.textLabel.text = @"Create New Workout";
+        cell.backgroundColor = [UIColor cyanColor];
     }
     
     return cell;

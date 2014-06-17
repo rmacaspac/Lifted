@@ -74,6 +74,7 @@
     
     self.workoutData = [fetchedWorkoutData mutableCopy];
     
+    // Adding Header and Footer to tableView
     UIView *header = [[UIView alloc] initWithFrame:CGRectMake(0, 40, 1, 1)];
 	header.backgroundColor = [UIColor lightGrayColor];
     self.workoutTableView.tableHeaderView = header;

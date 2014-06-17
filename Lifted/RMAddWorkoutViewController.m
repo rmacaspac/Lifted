@@ -15,6 +15,7 @@
 @interface RMAddWorkoutViewController () <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate, UIAlertViewDelegate, RMEditExerciseViewControllerDelegate, RMSelectExercisesViewControllerDelegate>
 
 @property (strong, nonatomic) IBOutlet UITextField *workoutNameTextField;
+
 @property (strong, nonatomic) IBOutlet UITableView *exercisesTableView;
 @property (strong, nonatomic) IBOutlet UIButton *cancelButton;
 @property (strong, nonatomic) IBOutlet UIButton *finishButton;
@@ -47,6 +48,19 @@
     self.exercisesTableView.delegate = self;
     self.exercisesTableView.dataSource = self;
     self.workoutNameTextField.delegate = self;
+    
+    // Indenting workoutNameTextField
+    UIView *spacerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 11, 10)];
+    [self.workoutNameTextField setLeftViewMode:UITextFieldViewModeAlways];
+    [self.workoutNameTextField setLeftView:spacerView];
+    
+    // Adding Header and Footer to tableView
+    UIView *header = [[UIView alloc] initWithFrame:CGRectMake(0, 40, 1, 1)];
+	header.backgroundColor = [UIColor lightGrayColor];
+	self.exercisesTableView.tableHeaderView = header;
+    UIView *footer = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 1, 1)];
+	footer.backgroundColor = [UIColor lightGrayColor];
+	self.exercisesTableView.tableFooterView = footer;
 }
 
 - (void)didReceiveMemoryWarning
@@ -113,6 +127,7 @@
         cell.textLabel.text = [selectedExercise valueForKey:@"exerciseName"];
     } else {
         cell.textLabel.text = @"Add Exercise";
+        cell.backgroundColor = [UIColor cyanColor];
         cell.accessoryType = UITableViewCellAccessoryNone;
     }
     

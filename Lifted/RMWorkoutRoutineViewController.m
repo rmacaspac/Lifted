@@ -51,6 +51,14 @@
 
     [self orderRoutineExercises];
     
+    // Adding Header and Footer to tableView
+    UIView *header = [[UIView alloc] initWithFrame:CGRectMake(0, 40, 1, 1)];
+	header.backgroundColor = [UIColor lightGrayColor];
+	self.workoutRoutineTableView.tableHeaderView = header;
+    UIView *footer = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 1, 1)];
+	footer.backgroundColor = [UIColor lightGrayColor];
+	self.workoutRoutineTableView.tableFooterView = footer;
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -81,6 +89,11 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [self performSegueWithIdentifier:@"routineToDataInputSegue" sender:indexPath];
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 40.0;
 }
 
 - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
