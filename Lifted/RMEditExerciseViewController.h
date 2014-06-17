@@ -20,7 +20,6 @@
 
 @property (weak) id <RMEditExerciseViewControllerDelegate> delegate;
 
-@property (strong, nonatomic) NSMutableArray *exerciseData;
 @property (strong, nonatomic) RMExerciseObject *selectedExercise;
 @property (nonatomic) NSInteger selectedIndexPath;
 

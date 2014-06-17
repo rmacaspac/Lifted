@@ -8,7 +8,6 @@
 
 #import "RMWorkoutRoutineViewController.h"
 #import "RMExerciseDataInputViewController.h"
-#import "RMCoreDataHelper.h"
 
 @interface RMWorkoutRoutineViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -91,7 +90,6 @@
                 RMExerciseDataInputViewController *exerciseDataInputVC = segue.destinationViewController;
                 NSIndexPath *indexPath = [self.workoutRoutineTableView indexPathForSelectedRow];
                 exerciseDataInputVC.selectedExercise = self.routineExercises[indexPath.row];
-                exerciseDataInputVC.selectedRoutine = self.routine;
             }
         }
     }

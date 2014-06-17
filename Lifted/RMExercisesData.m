@@ -23,7 +23,7 @@
     self = [super init];
     
     self.exerciseName = exerciseInfo[EXERCISE_NAME];
-    self.numberOfSets = exerciseInfo[EXERCISE_SETS];
+    self.numberOfSets = [exerciseInfo[EXERCISE_SETS] intValue];
     self.repMin = [exerciseInfo[EXERCISE_REP_MIN] intValue];
     self.repMax = [exerciseInfo[EXERCISE_REP_MAX] intValue];
     

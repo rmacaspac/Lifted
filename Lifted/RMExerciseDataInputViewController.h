@@ -13,6 +13,5 @@
 @interface RMExerciseDataInputViewController : UIViewController
 
 @property (strong, nonatomic) Exercise *selectedExercise;
-@property (strong, nonatomic) Routine *selectedRoutine;
 
 @end

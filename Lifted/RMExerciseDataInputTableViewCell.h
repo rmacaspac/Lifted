@@ -12,7 +12,7 @@
 
 @protocol RMExerciseDataInputTableViewCellDelegate <NSObject>
 
-- (void)didEnterData:(NSString *)repEntered and:(NSString *)weightEntered;
+-(void)didEnterData:(NSString *)repEntered and:(NSString *)weightEntered atIndexPath:(int)row;
 
 @end
 
@@ -23,9 +23,5 @@
 @property (strong, nonatomic) IBOutlet UITextField *weightTextField;
 
 @property (weak, nonatomic) id <RMExerciseDataInputTableViewCellDelegate> delegate;
-
-@property (strong, nonatomic) Exercise *exercise;
-@property (strong, nonatomic) Sets *sets;
-@property (strong, nonatomic) NSArray *dataEntered;
 
 @end

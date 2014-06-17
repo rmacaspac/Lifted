@@ -18,8 +18,6 @@
 @property (strong, nonatomic) IBOutlet UILabel *repMaxLabel;
 @property (strong, nonatomic) IBOutlet UILabel *dateLabel;
 
-@property (strong, nonatomic) Exercise *exercise;
-@property (strong, nonatomic) Sets *sets;
 @property (strong, nonatomic) NSArray *rowData;
 @property (strong, nonatomic) NSMutableArray *workoutData;
 
@@ -57,36 +55,25 @@
     [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
     self.dateLabel.text = [dateFormatter stringFromDate:[NSDate date]];
     
-    
     self.exerciseNameLabel.text = [self.selectedExercise valueForKey:@"name"];
     self.repMinLabel.text = [NSString stringWithFormat:@"%@",[self.selectedExercise valueForKey:EXERCISE_REP_MIN]];
     self.repMaxLabel.text = [NSString stringWithFormat:@"%@",[self.selectedExercise valueForKey:EXERCISE_REP_MAX]];
-    
-    NSLog(@"the exercises data for routine is %@", self.selectedExercise);
-    
-
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
+    // Fetching set data for selected exercise and putting it into workoutData array.
     NSManagedObjectContext *context = [RMCoreDataHelper managedObjectContext];
     NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"Set"];
-    fetchRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"exercise" ascending:NO]];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"exercise == %@", self.selectedExercise];
+    [fetchRequest setPredicate:predicate];
     fetchRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"repsAndWeightLifted" ascending:NO]];
-
+    
     NSError *error = nil;
     
     NSArray *fetchedWorkoutData = [context executeFetchRequest:fetchRequest error:&error];
     
     self.workoutData = [fetchedWorkoutData mutableCopy];
-    for (NSArray *rowData in [self.workoutData valueForKey:@"repsAndWeightLifted"]) {
-        self.rowData = rowData;
-    }
-    
-    
-    NSLog(@"workout data on row is %@", self.rowData);
-    
-    
 }
 
 - (void)didReceiveMemoryWarning
@@ -101,19 +88,12 @@
 {
     NSManagedObjectContext *context = [RMCoreDataHelper managedObjectContext];
     
-//    Exercise *exercise = [NSEntityDescription insertNewObjectForEntityForName:@"Exercise" inManagedObjectContext:context];
+    Sets *sets = [NSEntityDescription insertNewObjectForEntityForName:@"Set" inManagedObjectContext:context];
+    sets.exercise = self.selectedExercise;
+    sets.repsAndWeightLifted = self.workoutData;
     
     NSError *error = nil;
     
-//    if (![[exercise managedObjectContext] save:&error]) {
-//        NSLog(@"%@", error);
-//    }
-
-    Sets *sets = [NSEntityDescription insertNewObjectForEntityForName:@"Set" inManagedObjectContext:context];
-    sets.exercise.routine = self.selectedRoutine;
-    sets.exercise = self.selectedExercise;
-    sets.repsAndWeightLifted = self.workoutData;
-
     if (![[sets managedObjectContext] save:&error]) {
         NSLog(@"%@", error);
     }
@@ -128,16 +108,19 @@
     static NSString *cellIdentifier = @"Cell";
     RMExerciseDataInputTableViewCell *cell = [self.workoutTableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
     cell.delegate = self;
+    cell.numberOfRepsTextField.tag = indexPath.row;
+    cell.weightTextField.tag = indexPath.row;
     
-//    if (indexPath.section == 0 && [self.rowData count] > 0) {
-////        cell.previousWeightLabel.text = [[[self.rowData valueForKey:@"repsAndWeightLifted"] objectAtIndex:0] objectAtIndex:0];
-//        cell.exercise = self.selectedExercise;
-//        cell.numberOfRepsTextField.text = nil;
-//        cell.weightTextField.text = nil;
-//    } else if (indexPath.section == 1) {
-//        cell.textLabel.font = [UIFont fontWithName:@"Arial Hebrew" size:14.0];
-//        cell.textLabel.text = @"Add Set";
-//    }
+    if (indexPath.section == 0 && [self.workoutData count] > 0) {
+        
+        NSString *repNumber = [[[[self.workoutData valueForKey:@"repsAndWeightLifted"] objectAtIndex:0] objectAtIndex:indexPath.row] objectAtIndex:0];
+        NSString *weightNumber = [[[[self.workoutData valueForKey:@"repsAndWeightLifted"] objectAtIndex:0] objectAtIndex:indexPath.row] objectAtIndex:1];
+        cell.previousWeightLabel.text = [NSString stringWithFormat:@"%@ x %@", repNumber, weightNumber];
+        
+    } else if (indexPath.section == 1) {
+        cell.textLabel.font = [UIFont fontWithName:@"Arial Hebrew" size:14.0];
+        cell.textLabel.text = @"Add Set";
+    }
     
     return cell;
 }
@@ -149,7 +132,6 @@
     } else {
         return 1;
     }
-    
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -157,22 +139,17 @@
     return 2;
 }
 
-#pragma mark - UITableView Delegate
-
-- (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-
-}
-
 #pragma mark - RMExerciseDataInputTableViewCell Delegate
 
--(void)didEnterData:(NSString *)repEntered and:(NSString *)weightEntered
+-(void)didEnterData:(NSString *)repEntered and:(NSString *)weightEntered atIndexPath:(int)row
 {
-    self.rowData = [[NSArray alloc] initWithObjects:repEntered, weightEntered, nil];
-    [self.workoutData addObject:self.rowData];
-    NSLog(@"row data is %@", self.rowData);
-    NSLog(@"workout data is %@", self.workoutData);
-    
+    if ([self.workoutData count] > [[self.selectedExercise valueForKey:EXERCISE_SETS] integerValue] - 1) {
+        self.rowData = [[NSArray alloc] initWithObjects:repEntered, weightEntered, nil];
+        [self.workoutData replaceObjectAtIndex:row withObject:self.rowData];
+    } else {
+        self.rowData = [[NSArray alloc] initWithObjects:repEntered, weightEntered, nil];
+        [self.workoutData insertObject:self.rowData atIndex:row];
+    }
 }
 
 @end

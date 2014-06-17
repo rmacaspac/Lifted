@@ -7,7 +7,6 @@
 //
 
 #import "RMExerciseDataInputTableViewCell.h"
-#import "RMCoreDataHelper.h"
 
 @implementation RMExerciseDataInputTableViewCell
 
@@ -18,17 +17,6 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         
-//        //Fetching array from file system using Core Data
-//        NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"Exercise"];
-//        fetchRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"sets" ascending:NO]];
-//        
-//        NSError *error = nil;
-//        
-//        NSArray *fetchedRoutines = [[RMCoreDataHelper managedObjectContext] executeFetchRequest:fetchRequest error:&error];
-//        
-//        self.previousWeightLabel.text = [NSString stringWithFormat:@"%@", fetchedRoutines[0]];
-//        
-//        NSLog(@"data saved is %@", fetchedRoutines);
     }
     return self;
 }
@@ -41,7 +29,6 @@
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
 {
-    
     [super setSelected:selected animated:animated];
     
     self.numberOfRepsTextField.delegate = self;
@@ -50,27 +37,19 @@
 
 #pragma mark - IBActions
 
-
 - (IBAction)weightNumberAdded:(UITextField *)sender
 {
-    NSLog(@"Text in text field is %@", self.numberOfRepsTextField.text);
-    if (self.weightTextField.text.length > 0) {
-        [self.delegate didEnterData:self.numberOfRepsTextField.text and:self.weightTextField.text];
-    }
+    int row = self.weightTextField.tag;
+    
+    [self.delegate didEnterData:self.numberOfRepsTextField.text and:self.weightTextField.text atIndexPath:row];
 }
 
-
-/*
-- (IBAction)repNumberAdded:(UITextField *)sender
+- (IBAction)repsNumberAdded:(UITextField *)sender
 {
-    if (self.numberOfRepsTextField.text.length > 0 && self.weightTextField.text.length > 0) {
-        NSArray *repDataEntered = [[NSArray alloc] initWithObjects:self.numberOfRepsTextField.text, self.weightTextField.text, nil];
-        [self.delegate didEnterData:repDataEntered];
-    } else if ([self.numberOfRepsTextField.text stringByTrimmingCharactersInSet:[NSCharacterSet decimalDigitCharacterSet]] != nil) {
-        NSLog(@"nothing saved");
-    }
+    int row = self.numberOfRepsTextField.tag;
+    
+    [self.delegate didEnterData:self.numberOfRepsTextField.text and:self.weightTextField.text atIndexPath:row];
 }
- */
 
 
 @end

@@ -7,8 +7,6 @@
 //
 
 #import "RMEditExerciseViewController.h"
-#import "Routine.h"
-#import "RMCoreDataHelper.h"
 
 @interface RMEditExerciseViewController ()
 
@@ -21,15 +19,6 @@
 @end
 
 @implementation RMEditExerciseViewController
-
-- (NSMutableArray *)exerciseData
-{
-    if (!_exerciseData) {
-        _exerciseData = [[NSMutableArray alloc] init];
-    }
-    return _exerciseData;
-}
-
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -55,8 +44,6 @@
     self.numberOfSetsTextField.text = [NSString stringWithFormat:@"%@", [self.selectedExercise valueForKey:EXERCISE_SETS]];
     self.repMinTextField.text = [NSString stringWithFormat:@"%@", [self.selectedExercise valueForKey:EXERCISE_REP_MIN]];
     self.repMaxTextField.text = [NSString stringWithFormat:@"%@", [self.selectedExercise valueForKey:EXERCISE_REP_MAX]];
-    
-    NSLog(@"Index path is %i", self.selectedIndexPath);
 }
 
 - (void)didReceiveMemoryWarning
@@ -64,15 +51,6 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
- #pragma mark - Navigation
- 
- // In a storyboard-based application, you will often want to do a little preparation before navigation
- - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
- {
- // Get the new view controller using [segue destinationViewController].
- // Pass the selected object to the new view controller.
- }
 
 #pragma mark - IBActions
 

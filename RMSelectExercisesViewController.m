@@ -80,7 +80,6 @@
     RMExerciseObject *exercise = self.exerciseObject[indexPath.row];
     [self.delegate didSelectExercise:exercise];
     [self.navigationController popViewControllerAnimated:YES];
-    NSLog(@"Exercise object selected is %@", exercise);
 }
 
 - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath

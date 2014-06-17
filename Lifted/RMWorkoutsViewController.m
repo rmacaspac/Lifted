@@ -9,7 +9,6 @@
 #import "RMWorkoutsViewController.h"
 #import "RMAddWorkoutViewController.h"
 #import "RMWorkoutRoutineViewController.h"
-#import "Routine.h"
 #import "RMCoreDataHelper.h"
 
 
