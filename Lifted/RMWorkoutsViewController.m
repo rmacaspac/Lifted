@@ -7,13 +7,12 @@
 //
 
 #import "RMWorkoutsViewController.h"
-#import "RMAddWorkoutViewController.h"
 #import "RMAddWorkoutTableViewController.h"
 #import "RMWorkoutRoutineViewController.h"
 #import "RMCoreDataHelper.h"
 
 
-@interface RMWorkoutsViewController () <UITableViewDataSource, UITableViewDelegate, RMAddWorkoutViewControllerDelegate>
+@interface RMWorkoutsViewController () <UITableViewDataSource, UITableViewDelegate, RMAddWorkoutTableViewControllerDelegate>
 
 @property (strong, nonatomic) NSString *workoutName;
 @property (strong, nonatomic) IBOutlet UITableView *workoutsTableView;
@@ -80,7 +79,7 @@
         }
     else {
         cell.textLabel.text = @"Create New Workout";
-        cell.backgroundColor = [UIColor cyanColor];
+        cell.backgroundColor = [UIColor lightGrayColor];
     }
     
     return cell;

@@ -147,7 +147,7 @@
     } else if (indexPath.section == 1) {
         cell.textLabel.font = [UIFont fontWithName:@"Arial Hebrew" size:14.0];
         cell.textLabel.text = @"Add Set";
-        cell.backgroundColor = [UIColor cyanColor];
+        cell.backgroundColor = [UIColor lightGrayColor];
     }
     
     return cell;

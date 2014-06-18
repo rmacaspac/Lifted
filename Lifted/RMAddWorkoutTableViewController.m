@@ -7,12 +7,12 @@
 //
 
 #import "RMAddWorkoutTableViewController.h"
-#import "RMSelectExercisesViewController.h"
+#import "RMSelectExerciseTableViewController.h"
 #import "RMEditExerciseTableViewController.h"
 #import "RMCoreDataHelper.h"
 #import "RMExercisesData.h"
 
-@interface RMAddWorkoutTableViewController () <UITextFieldDelegate, UIAlertViewDelegate, RMSelectExercisesViewControllerDelegate, RMEditExerciseTableViewControllerDelegate>
+@interface RMAddWorkoutTableViewController () <UITextFieldDelegate, UIAlertViewDelegate, RMEditExerciseTableViewControllerDelegate,RMSelectExercisesTableViewControllerDelegate>
 
 
 @property (strong, nonatomic) IBOutlet UITextField *routineNameTextField;
@@ -50,9 +50,6 @@
     self.routineNameTextField.delegate = self;
     self.routineNameTextField.frame = CGRectMake(20, 2, 280, 40);
     self.routineNameTextField.font = [UIFont fontWithName:@"Arial Hebrew" size:14.0];
-    
-    
-
 }
 
 - (void)didReceiveMemoryWarning
@@ -82,8 +79,8 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    if ([segue.destinationViewController isKindOfClass:[RMSelectExercisesViewController class]]) {
-        RMSelectExercisesViewController *selectExerciseVC = segue.destinationViewController;
+    if ([segue.destinationViewController isKindOfClass:[RMSelectExerciseTableViewController class]]) {
+        RMSelectExerciseTableViewController *selectExerciseVC = segue.destinationViewController;
         selectExerciseVC.delegate = self;
     }
     if ([segue.identifier isEqualToString:@"exercisesToEditExercisesSegue"]) {

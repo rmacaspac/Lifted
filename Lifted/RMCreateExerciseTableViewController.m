@@ -138,10 +138,6 @@
     return YES;
 }
 
-
-
-
-
 #pragma mark - Helper Methods
 
 - (RMExerciseObject *)newExerciseObject
