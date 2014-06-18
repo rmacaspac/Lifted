@@ -7,9 +7,10 @@
 //
 
 #import "RMSelectExercisesViewController.h"
+#import "RMCreateExerciseTableViewController.h"
 #import "RMExercisesData.h"
 
-@interface RMSelectExercisesViewController () <UITableViewDataSource, UITableViewDelegate>
+@interface RMSelectExercisesViewController () <UITableViewDataSource, UITableViewDelegate, RMCreateExerciseTableViewControllerDelegate>
 
 @property (strong, nonatomic) IBOutlet UITableView *exercisesTableView;
 @property (strong, nonatomic) IBOutlet UITableView *exerciseTypeTableView;
@@ -17,7 +18,6 @@
 @property (strong, nonatomic) NSMutableArray *exerciseObject;
 @property (nonatomic) BOOL showAllTargeted;
 @property (nonatomic) BOOL showAllExercises;
-
 
 @end
 
@@ -84,6 +84,16 @@
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark - Navigation
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.destinationViewController isKindOfClass:[RMCreateExerciseTableViewController class]]) {
+        RMCreateExerciseTableViewController *createExerciseVC = segue.destinationViewController;
+        createExerciseVC.delegate = self;
+    }
+}
+
 
 #pragma mark - UITableView Data Source
 
@@ -96,7 +106,6 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
     }
     if (tableView == self.exercisesTableView && indexPath.section == 0) {
-        [cell.contentView bringSubviewToFront:self.exerciseTypeTableView];
         cell.textLabel.text = @"Select Exercise";
     } else if (tableView == self.exercisesTableView && indexPath.section == 1) {
         cell.textLabel.text = [self.exerciseObject valueForKey:EXERCISE_NAME][indexPath.row];
@@ -185,6 +194,8 @@
             self.showAllTargeted = !self.showAllTargeted;
             [self.exerciseTypeTableView reloadData];
         }
+    } else if (tableView == self.exercisesTableView && indexPath.section == 0) {
+        [self performSegueWithIdentifier:@"selectExerciseToCreateExerciseSegue" sender:indexPath];
     }
 }
 
@@ -193,5 +204,11 @@
 {
     return YES;
 }
+
+- (void)didCreateWorkout:(RMExerciseObject *)exerciseObject
+{
+    NSLog(@"Exercise Object %@", exerciseObject);
+}
+
 
 @end

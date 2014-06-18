@@ -1,8 +1,8 @@
 //
-//  RMEditExerciseViewController.h
+//  RMEditExerciseTableViewController.h
 //  Lifted
 //
-//  Created by Ryan Macaspac on 6/4/14.
+//  Created by Ryan Macaspac on 6/17/14.
 //  Copyright (c) 2014 Ryan Macaspac. All rights reserved.
 //
 
@@ -10,15 +10,15 @@
 #import "Exercise.h"
 #import "RMExerciseObject.h"
 
-@protocol RMEditExerciseViewControllerDelegate <NSObject>
+@protocol RMEditExerciseTableViewControllerDelegate <NSObject>
 
 -(void)didChangeData:(RMExerciseObject *)editedExerciseObject underIndexPath:(NSInteger)indexPathRow;
 
 @end
 
-@interface RMEditExerciseViewController : UIViewController
+@interface RMEditExerciseTableViewController : UITableViewController
 
-@property (weak) id <RMEditExerciseViewControllerDelegate> delegate;
+@property (weak) id <RMEditExerciseTableViewControllerDelegate> delegate;
 
 @property (strong, nonatomic) RMExerciseObject *selectedExercise;
 @property (nonatomic) NSInteger selectedIndexPath;

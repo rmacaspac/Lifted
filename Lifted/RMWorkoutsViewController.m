@@ -8,6 +8,7 @@
 
 #import "RMWorkoutsViewController.h"
 #import "RMAddWorkoutViewController.h"
+#import "RMAddWorkoutTableViewController.h"
 #import "RMWorkoutRoutineViewController.h"
 #import "RMCoreDataHelper.h"
 
@@ -115,8 +116,13 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    if ([segue.destinationViewController isKindOfClass:[RMAddWorkoutViewController class]]) {
-        RMAddWorkoutViewController *addWorkoutVC = segue.destinationViewController;
+//    if ([segue.destinationViewController isKindOfClass:[RMAddWorkoutViewController class]]) {
+//        RMAddWorkoutViewController *addWorkoutVC = segue.destinationViewController;
+//        addWorkoutVC.delegate = self;
+//    }
+//    
+    if ([segue.destinationViewController isKindOfClass:[RMAddWorkoutTableViewController class]]) {
+        RMAddWorkoutTableViewController *addWorkoutVC = segue.destinationViewController;
         addWorkoutVC.delegate = self;
     }
     if ([sender isKindOfClass:[NSIndexPath class]]) {
