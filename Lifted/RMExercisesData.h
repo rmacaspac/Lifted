@@ -19,6 +19,6 @@
 
 - (id)initWithData:(NSDictionary *)exerciseInfo;
 + (NSMutableArray *)exerciseList;
-+ (NSMutableArray *)exerciseType;
++ (NSArray *)muscleType;
 
 @end

@@ -38,10 +38,12 @@
     
     self.exerciseNameTextField.delegate = self;
     
-    // Setting inital values
+    // Initial Setup
     self.numberOfSetsLabel.text = [NSString stringWithFormat:@"%i", 4];
     self.repMinLabel.text = [NSString stringWithFormat:@"%i", 6];
     self.repMaxLabel.text = [NSString stringWithFormat:@"%i", 10];
+    self.view.backgroundColor = [UIColor colorWithRed:242/255.0 green:242/255.0 blue:242/255.0 alpha:1.0];
+
     
 }
 

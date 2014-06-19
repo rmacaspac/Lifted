@@ -59,10 +59,10 @@
     return exercises;
 }
 
-+ (NSMutableArray *)exerciseType
++ (NSArray *)muscleType
 {
-    NSMutableArray *exerciseTypes = [[NSMutableArray alloc] initWithObjects:@"Arms", @"Chest", @"Back", @"Shoulders", @"Legs", nil];
-    return exerciseTypes;
+    NSArray *muscleTypes = [[NSArray alloc] initWithObjects:@"Select Muscle Group", @"Arms", @"Back", @"Chest", @"Legs", @"Shoulders", @"Other", nil];
+    return muscleTypes;
 }
 
 

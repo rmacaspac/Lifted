@@ -55,6 +55,10 @@
     self.exerciseNameLabel.text = [self.selectedExercise valueForKey:@"name"];
     self.repMinLabel.text = [NSString stringWithFormat:@"%@",[self.selectedExercise valueForKey:EXERCISE_REP_MIN]];
     self.repMaxLabel.text = [NSString stringWithFormat:@"%@",[self.selectedExercise valueForKey:EXERCISE_REP_MAX]];
+    self.view.backgroundColor = [UIColor colorWithRed:242/255.0 green:242/255.0 blue:242/255.0 alpha:1.0];
+    self.workoutTableView.backgroundColor = [UIColor colorWithRed:242/255.0 green:242/255.0 blue:242/255.0 alpha:1.0];
+
+
     
     NSLog(@"selected exercise data is %@", self.selectedExercise);
 }
@@ -147,7 +151,6 @@
     } else if (indexPath.section == 1) {
         cell.textLabel.font = [UIFont fontWithName:@"Arial Hebrew" size:14.0];
         cell.textLabel.text = @"Add Set";
-        cell.backgroundColor = [UIColor lightGrayColor];
     }
     
     return cell;

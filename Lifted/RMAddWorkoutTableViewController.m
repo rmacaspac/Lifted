@@ -36,8 +36,6 @@
     self = [super initWithStyle:style];
     if (self) {
         // Custom initialization
-        self.tableView.frame = CGRectMake(0, 0, 320, 528);
-        [self.tableView reloadData];
     }
     return self;
 }
@@ -46,10 +44,17 @@
 {
     [super viewDidLoad];
     
+    // Setting routine name text field properties
     self.routineNameTextField = [[UITextField alloc] init];
     self.routineNameTextField.delegate = self;
     self.routineNameTextField.frame = CGRectMake(20, 2, 280, 40);
     self.routineNameTextField.font = [UIFont fontWithName:@"Arial Hebrew" size:14.0];
+    self.routineNameTextField.placeholder = @"Example: Chest";
+    self.routineNameTextField.enablesReturnKeyAutomatically = YES;
+    self.routineNameTextField.returnKeyType = UIReturnKeyDone;
+    
+    self.view.backgroundColor = [UIColor colorWithRed:242/255.0 green:242/255.0 blue:242/255.0 alpha:1.0];
+
 }
 
 - (void)didReceiveMemoryWarning
@@ -116,7 +121,6 @@
     } else if (![self.exerciseData count] && indexPath.section == 1){
         cell.textLabel.font = [UIFont fontWithName:@"Arial Hebrew" size:14.0];
         cell.textLabel.text = @"Add Exercise";
-        cell.backgroundColor = [UIColor lightGrayColor];
         cell.accessoryType = UITableViewCellAccessoryNone;
     }
     
@@ -129,8 +133,10 @@
         return 1;
     } else if (section == 1) {
         return 1;
-    } else {
+    } else if (section == 2) {
         return [self.exerciseData count];
+    } else {
+        return 1;
     }
 }
 
@@ -184,12 +190,12 @@
     UILabel *myLabel = [[UILabel alloc] init];
     
     if (section == 0) {
-        myLabel.frame = CGRectMake(18, 25, 320, 20);
+        myLabel.frame = CGRectMake(18, 31, 320, 20);
         myLabel.font = [UIFont fontWithName:@"Arial Hebrew" size:14.0];
         myLabel.textColor = [UIColor blackColor];
         myLabel.text = [self tableView:tableView titleForHeaderInSection:section];
     } else if (section == 1) {
-        myLabel.frame = CGRectMake(18, 8, 320, 20);
+        myLabel.frame = CGRectMake(18, 15, 320, 20);
         myLabel.font = [UIFont fontWithName:@"Arial Hebrew" size:14.0];
         myLabel.textColor = [UIColor blackColor];
         myLabel.text = [self tableView:tableView titleForHeaderInSection:section];
@@ -209,7 +215,7 @@
     [self.exerciseData addObject:selectedExercise];
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:[self.exerciseData count] - 1 inSection:2];
     [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-//    [self.tableView reloadData];
+    //    [self.tableView reloadData];
 }
 
 #pragma mark - RMEditExerciseViewController Delegate

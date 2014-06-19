@@ -43,6 +43,8 @@
     self.workoutRoutineTableView.dataSource = self;
     self.workoutRoutineTableView.delegate = self;
     
+    self.view.backgroundColor = [UIColor colorWithRed:242/255.0 green:242/255.0 blue:242/255.0 alpha:1.0];
+    self.workoutRoutineTableView.backgroundColor = [UIColor colorWithRed:242/255.0 green:242/255.0 blue:242/255.0 alpha:1.0];
     self.navigationItem.title = [self.routine valueForKey:@"name"];
     
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];

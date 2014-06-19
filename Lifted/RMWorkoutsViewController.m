@@ -48,6 +48,10 @@
     self.workoutsTableView.dataSource = self;
     self.workoutsTableView.delegate = self;
     
+    self.view.backgroundColor = [UIColor colorWithRed:242/255.0 green:242/255.0 blue:242/255.0 alpha:1.0];
+    self.workoutsTableView.backgroundColor = [UIColor colorWithRed:242/255.0 green:242/255.0 blue:242/255.0 alpha:1.0];
+
+    
     // Adding Header and Footer to tableView
     UIView *header = [[UIView alloc] initWithFrame:CGRectMake(0, 40, 1, 1)];
 	header.backgroundColor = [UIColor lightGrayColor];
@@ -79,7 +83,7 @@
         }
     else {
         cell.textLabel.text = @"Create New Workout";
-        cell.backgroundColor = [UIColor lightGrayColor];
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
     
     return cell;
@@ -115,11 +119,6 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-//    if ([segue.destinationViewController isKindOfClass:[RMAddWorkoutViewController class]]) {
-//        RMAddWorkoutViewController *addWorkoutVC = segue.destinationViewController;
-//        addWorkoutVC.delegate = self;
-//    }
-//    
     if ([segue.destinationViewController isKindOfClass:[RMAddWorkoutTableViewController class]]) {
         RMAddWorkoutTableViewController *addWorkoutVC = segue.destinationViewController;
         addWorkoutVC.delegate = self;
