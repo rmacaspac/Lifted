@@ -8,11 +8,10 @@
 
 #import "RMAddWorkoutTableViewController.h"
 #import "RMSelectExerciseTableViewController.h"
-#import "RMEditExerciseTableViewController.h"
 #import "RMCoreDataHelper.h"
 #import "RMExercisesData.h"
 
-@interface RMAddWorkoutTableViewController () <UITextFieldDelegate, UIAlertViewDelegate, RMEditExerciseTableViewControllerDelegate,RMSelectExercisesTableViewControllerDelegate>
+@interface RMAddWorkoutTableViewController () <UITextFieldDelegate, UIAlertViewDelegate,RMSelectExercisesTableViewControllerDelegate>
 
 
 @property (strong, nonatomic) IBOutlet UITextField *routineNameTextField;
@@ -49,7 +48,7 @@
     self.routineNameTextField.delegate = self;
     self.routineNameTextField.frame = CGRectMake(20, 2, 280, 40);
     self.routineNameTextField.font = [UIFont fontWithName:@"Arial Hebrew" size:14.0];
-    self.routineNameTextField.placeholder = @"Example: Chest";
+    self.routineNameTextField.placeholder = @"Example: Chest/Triceps";
     self.routineNameTextField.enablesReturnKeyAutomatically = YES;
     self.routineNameTextField.returnKeyType = UIReturnKeyDone;
     
@@ -88,21 +87,7 @@
         RMSelectExerciseTableViewController *selectExerciseVC = segue.destinationViewController;
         selectExerciseVC.delegate = self;
     }
-    if ([segue.identifier isEqualToString:@"exercisesToEditExercisesSegue"]) {
-        if ([segue.destinationViewController isKindOfClass:[RMEditExerciseTableViewController class]]) {
-            RMEditExerciseTableViewController *editExerciseVC = segue.destinationViewController;
-            NSIndexPath *indexPath = sender;
-            editExerciseVC.selectedIndexPath = indexPath.row;
-            editExerciseVC.selectedExercise = self.exerciseData[indexPath.row];
-        }
-    }
-    if ([segue.destinationViewController isKindOfClass:[RMEditExerciseTableViewController class]]) {
-        RMEditExerciseTableViewController *editExerciseVC = segue.destinationViewController;
-        editExerciseVC.delegate = self;
-    }
 }
-
-
 
 #pragma mark - UITableView Data Source
 
@@ -151,8 +136,6 @@
 {
     if (indexPath.section == 1) {
         [self performSegueWithIdentifier:@"addWorkoutToSelectExerciseSegue" sender:indexPath];
-    } else if (indexPath.section == 2) {
-        [self performSegueWithIdentifier:@"exercisesToEditExercisesSegue" sender:indexPath];
     }
 }
 
@@ -215,22 +198,9 @@
     [self.exerciseData addObject:selectedExercise];
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:[self.exerciseData count] - 1 inSection:2];
     [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    //    [self.tableView reloadData];
 }
 
-#pragma mark - RMEditExerciseViewController Delegate
-- (void)didChangeData:(RMExerciseObject *)editedExerciseObject underIndexPath:(NSInteger)indexPathRow
-{
-    // Removing unedited object from exerciseData Array and tableview at indexPath selected by user
-    [self.exerciseData removeObjectAtIndex:indexPathRow];
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:indexPathRow inSection:2];
-    [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
-    
-    // Inserting new object to exerciseData Array and tableview at indexPath selected by user
-    [self.exerciseData insertObject:editedExerciseObject atIndex:indexPathRow];
-    [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
-    [self.tableView reloadData];
-}
+
 
 #pragma mark - Helper Methods
 

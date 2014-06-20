@@ -1,12 +1,18 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="5063" systemVersion="13D65" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="Exercise" representedClassName="Exercise" syncable="YES">
+        <attribute name="date" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="numberOfSets" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="repMax" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="repMin" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="muscle" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Muscle" inverseName="exercises" inverseEntity="Muscle" syncable="YES"/>
         <relationship name="routine" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Routine" inverseName="exercises" inverseEntity="Routine" syncable="YES"/>
         <relationship name="sets" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Set" inverseName="exercise" inverseEntity="Set" syncable="YES"/>
+    </entity>
+    <entity name="Muscle" representedClassName="Muscle" syncable="YES">
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="exercises" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Exercise" inverseName="muscle" inverseEntity="Exercise" syncable="YES"/>
     </entity>
     <entity name="Routine" representedClassName="Routine" syncable="YES">
         <attribute name="date" optional="YES" attributeType="Date" syncable="YES"/>
@@ -18,8 +24,9 @@
         <relationship name="exercise" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Exercise" inverseName="sets" inverseEntity="Exercise" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Exercise" positionX="144" positionY="-10" width="128" height="133"/>
-        <element name="Routine" positionX="-81" positionY="-16" width="128" height="88"/>
+        <element name="Exercise" positionX="144" positionY="-10" width="128" height="163"/>
+        <element name="Routine" positionX="-83" positionY="225" width="128" height="88"/>
         <element name="Set" positionX="430" positionY="5" width="128" height="73"/>
+        <element name="Muscle" positionX="-81" positionY="-9" width="128" height="73"/>
     </elements>
 </model>

@@ -17,7 +17,8 @@
 
 #define ROUTINE_NAME @"name"
 #define ROUTINE_EXERCISES @"exercises"
-#define EXERCISE_NAME @"exerciseName"
+#define EXERCISE_NAME @"name"
+#define EXERCISE_MUSCLE_GROUP @"muscle"
 #define EXERCISE_REP_MIN @"repMin"
 #define EXERCISE_REP_MAX @"repMax"
 #define EXERCISE_SETS @"numberOfSets"

@@ -17,11 +17,11 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="arnold.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="iDG-g1-Q3E">
-                                <rect key="frame" x="0.0" y="146" width="320" height="192"/>
+                                <rect key="frame" x="0.0" y="140" width="320" height="192"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d6I-Tq-3wS">
-                                <rect key="frame" x="113" y="376" width="95" height="30"/>
+                                <rect key="frame" x="118" y="399" width="95" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Start Workout">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -32,12 +32,22 @@
                                 </connections>
                             </button>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Lifted" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ORS-XT-HPW">
-                                <rect key="frame" x="126" y="108" width="69" height="30"/>
+                                <rect key="frame" x="126" y="97" width="69" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="ArialHebrew" family="Arial Hebrew" pointSize="28"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.50196081399917603" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gYJ-gB-cVt">
+                                <rect key="frame" x="103" y="361" width="125" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Manage Exercises">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="WeK-62-aGZ" kind="push" identifier="homeToManageExercisesSegue" id="NTQ-RU-UKQ"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -49,6 +59,71 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="668" y="109"/>
+        </scene>
+        <!--Manage Exercises Table View Controller-->
+        <scene sceneID="rqs-UB-Pjw">
+            <objects>
+                <tableViewController id="WeK-62-aGZ" customClass="RMManageExercisesTableViewController" sceneMemberID="viewController">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="iY2-FG-wwf">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" rowHeight="41" id="mXJ-CN-1C0">
+                                <rect key="frame" x="0.0" y="119" width="320" height="41"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="mXJ-CN-1C0" id="aCK-FJ-WTs">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="40"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="WeK-62-aGZ" id="CiU-8c-5vE"/>
+                            <outlet property="delegate" destination="WeK-62-aGZ" id="Ugg-eQ-roN"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="Q8L-rE-wnV"/>
+                    <connections>
+                        <segue destination="aNK-Wp-jgu" kind="push" identifier="manageToCreateSegue" id="gIm-co-0Im"/>
+                        <segue destination="eDS-1i-awt" kind="push" identifier="manageExerciseToManageMuscleSegue" id="AKg-75-GVe"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Tqe-ow-62k" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1201" y="-635"/>
+        </scene>
+        <!--Manage Muscle Group Table View Controller-->
+        <scene sceneID="6PU-gw-BFN">
+            <objects>
+                <tableViewController id="eDS-1i-awt" customClass="RMManageMuscleGroupTableViewController" sceneMemberID="viewController">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="NBp-RX-4vh">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" id="tDf-c9-Fmz">
+                                <rect key="frame" x="0.0" y="119" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="tDf-c9-Fmz" id="kVy-hL-8bw">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="eDS-1i-awt" id="5on-YT-cgN"/>
+                            <outlet property="delegate" destination="eDS-1i-awt" id="U2J-Tk-319"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="KXY-Tb-a8b"/>
+                    <connections>
+                        <segue destination="cfE-GE-8UC" kind="push" identifier="muscleGroupToEditExercisesSegue" id="gLn-cl-uhd"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="sZB-a2-ijG" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1745" y="-379"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="XzU-M9-Mfk">
@@ -235,9 +310,9 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Sml-tz-9hW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2311" y="-927"/>
+            <point key="canvasLocation" x="2483" y="-379"/>
         </scene>
-        <!--Add Workout Table View Controller-->
+        <!--Add Workout Table View Controller - Create Routine-->
         <scene sceneID="LYS-bq-jsQ">
             <objects>
                 <tableViewController id="z2T-oA-1hd" customClass="RMAddWorkoutTableViewController" sceneMemberID="viewController">
@@ -261,7 +336,7 @@
                         </connections>
                     </tableView>
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" id="xm8-0A-X02">
+                    <navigationItem key="navigationItem" title="Create Routine" id="xm8-0A-X02">
                         <barButtonItem key="rightBarButtonItem" title="Finish" id="aip-Re-buw">
                             <connections>
                                 <action selector="finishBarButtonItemPressed:" destination="z2T-oA-1hd" id="wec-Rh-acd"/>
@@ -270,160 +345,33 @@
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <segue destination="cfE-GE-8UC" kind="push" identifier="exercisesToEditExercisesSegue" id="sTY-yg-cph"/>
                         <segue destination="sZb-Ck-SL7" kind="push" identifier="addWorkoutToSelectExerciseSegue" id="5Gl-9p-vyY"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fIu-WI-2ai" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1677" y="-516"/>
+            <point key="canvasLocation" x="1737" y="580"/>
         </scene>
         <!--Create Exercise Table View Controller - Create Exercise-->
         <scene sceneID="gHo-ZN-Cqm">
             <objects>
                 <tableViewController id="aNK-Wp-jgu" customClass="RMCreateExerciseTableViewController" sceneMemberID="viewController">
-                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="41" sectionHeaderHeight="10" sectionFooterHeight="10" id="OOF-ZC-Fci">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="OOF-ZC-Fci">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <inset key="scrollIndicatorInsets" minX="0.0" minY="9" maxX="0.0" maxY="0.0"/>
-                        <sections>
-                            <tableViewSection headerTitle="Exercise Name" id="VGi-Qh-Bca">
-                                <cells>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="41" id="N4M-Ku-o4T">
-                                        <rect key="frame" x="0.0" y="119" width="320" height="41"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="N4M-Ku-o4T" id="sAN-c1-mZu">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="40"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Example: Barbell Bench Press" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tfu-re-cM6">
-                                                    <rect key="frame" x="20" y="2" width="280" height="40"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" name="ArialHebrew" family="Arial Hebrew" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits" returnKeyType="done"/>
-                                                </textField>
-                                            </subviews>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                </cells>
-                            </tableViewSection>
-                            <tableViewSection headerTitle="Targeted Muscle" id="LtT-Pq-NHX">
-                                <cells>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="41" id="KEc-Uf-d2M">
-                                        <rect key="frame" x="0.0" y="208" width="320" height="41"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KEc-Uf-d2M" id="r6s-HQ-nRd">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="40"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Targeted Muscle" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zP6-HL-U5Q">
-                                                    <rect key="frame" x="20" y="2" width="280" height="40"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" name="ArialHebrew" family="Arial Hebrew" pointSize="14"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                </cells>
-                            </tableViewSection>
-                            <tableViewSection headerTitle="Number of Sets" id="8Jx-Py-6Aq">
-                                <cells>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="41" id="Lad-JN-bar">
-                                        <rect key="frame" x="0.0" y="297" width="320" height="41"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Lad-JN-bar" id="bag-aT-3XY">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="40"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Sets:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="029-da-ZUm">
-                                                    <rect key="frame" x="20" y="12" width="40" height="21"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" name="ArialHebrew" family="Arial Hebrew" pointSize="14"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Sets" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xhP-C1-DmT">
-                                                    <rect key="frame" x="70" y="12" width="120" height="21"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" name="ArialHebrew" family="Arial Hebrew" pointSize="14"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <stepper opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="Uec-sX-BfY">
-                                                    <rect key="frame" x="206" y="6" width="94" height="29"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                                    <connections>
-                                                        <action selector="setsStepperPressed:" destination="aNK-Wp-jgu" eventType="valueChanged" id="5bl-aR-uUZ"/>
-                                                    </connections>
-                                                </stepper>
-                                            </subviews>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                </cells>
-                            </tableViewSection>
-                            <tableViewSection headerTitle="Rep Range" id="Qig-wy-1br">
-                                <cells>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="41" id="Muq-wo-hVy">
-                                        <rect key="frame" x="0.0" y="386" width="320" height="41"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Muq-wo-hVy" id="Lcq-Kx-Hja">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="40"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Min:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CNE-aO-S2u">
-                                                    <rect key="frame" x="20" y="12" width="34" height="21"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" name="ArialHebrew" family="Arial Hebrew" pointSize="14"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Min" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DoJ-DK-yOm">
-                                                    <rect key="frame" x="70" y="12" width="117" height="21"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" name="ArialHebrew" family="Arial Hebrew" pointSize="14"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <stepper opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="6zt-RR-neF">
-                                                    <rect key="frame" x="206" y="6" width="94" height="29"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                                    <connections>
-                                                        <action selector="repMinStepperPressed:" destination="aNK-Wp-jgu" eventType="valueChanged" id="h5o-NJ-j5Q"/>
-                                                    </connections>
-                                                </stepper>
-                                            </subviews>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="41" id="Q9m-6Z-2Ym">
-                                        <rect key="frame" x="0.0" y="427" width="320" height="41"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Q9m-6Z-2Ym" id="HZO-Ut-gR8">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="40"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Max:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VzX-B2-O2v">
-                                                    <rect key="frame" x="20" y="12" width="38" height="21"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" name="ArialHebrew" family="Arial Hebrew" pointSize="14"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Max" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a3i-Tf-PUk">
-                                                    <rect key="frame" x="70" y="12" width="116" height="21"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" name="ArialHebrew" family="Arial Hebrew" pointSize="14"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <stepper opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="CDa-aG-jGf">
-                                                    <rect key="frame" x="206" y="6" width="94" height="29"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                                    <connections>
-                                                        <action selector="repMaxStepperPressed:" destination="aNK-Wp-jgu" eventType="valueChanged" id="1d7-Gg-6iq"/>
-                                                    </connections>
-                                                </stepper>
-                                            </subviews>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                </cells>
-                            </tableViewSection>
-                        </sections>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" rowHeight="41" id="N4M-Ku-o4T">
+                                <rect key="frame" x="0.0" y="119" width="320" height="41"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="N4M-Ku-o4T" id="sAN-c1-mZu">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="40"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <sections/>
                         <connections>
                             <outlet property="dataSource" destination="aNK-Wp-jgu" id="fXA-jO-ULG"/>
                             <outlet property="delegate" destination="aNK-Wp-jgu" id="fmZ-A2-0PW"/>
@@ -436,18 +384,10 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
-                    <connections>
-                        <outlet property="exerciseNameTextField" destination="tfu-re-cM6" id="PPA-FP-g4v"/>
-                        <outlet property="numberOfSetsLabel" destination="xhP-C1-DmT" id="5ZS-Ws-2fI"/>
-                        <outlet property="repMaxLabel" destination="a3i-Tf-PUk" id="Avz-wp-FdK"/>
-                        <outlet property="repMinLabel" destination="DoJ-DK-yOm" id="yiZ-kY-3sH"/>
-                        <outlet property="setsStepper" destination="Uec-sX-BfY" id="i4w-0k-mgj"/>
-                        <outlet property="targetedMuscleLabel" destination="zP6-HL-U5Q" id="mR9-FO-dIf"/>
-                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FnZ-bj-gSP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2896" y="-59"/>
+            <point key="canvasLocation" x="1745" y="-1246"/>
         </scene>
         <!--Select Exercise Table View Controller-->
         <scene sceneID="SNm-If-qb4">
@@ -473,13 +413,10 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="cQa-Hc-RDF"/>
-                    <connections>
-                        <segue destination="aNK-Wp-jgu" kind="push" identifier="selectExerciseToCreateExerciseSegue" id="NMy-hn-sd8"/>
-                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AX8-m1-cNe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2311" y="-59"/>
+            <point key="canvasLocation" x="2379" y="793"/>
         </scene>
         <!--Workouts View Controller - Workouts-->
         <scene sceneID="axP-1d-iU1">
@@ -530,7 +467,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Djl-iz-gwQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1133" y="109"/>
+            <point key="canvasLocation" x="1201" y="817"/>
         </scene>
         <!--Workout Routine View Controller-->
         <scene sceneID="i8S-3K-ChV">
@@ -586,7 +523,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tgI-nV-MrD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1677" y="765"/>
+            <point key="canvasLocation" x="1745" y="1473"/>
         </scene>
         <!--Exercise Data Input View Controller-->
         <scene sceneID="uuF-Sq-A2z">
@@ -723,7 +660,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TRZ-1x-3nf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2239" y="765"/>
+            <point key="canvasLocation" x="2307" y="1473"/>
         </scene>
     </scenes>
     <resources>

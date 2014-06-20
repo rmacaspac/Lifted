@@ -1,5 +1,5 @@
 //
-//  Routine.h
+//  Muscle.h
 //  Lifted
 //
 //  Created by Ryan Macaspac on 6/19/14.
@@ -11,14 +11,13 @@
 
 @class Exercise;
 
-@interface Routine : NSManagedObject
+@interface Muscle : NSManagedObject
 
-@property (nonatomic, retain) NSDate * date;
 @property (nonatomic, retain) NSString * name;
 @property (nonatomic, retain) NSSet *exercises;
 @end
 
-@interface Routine (CoreDataGeneratedAccessors)
+@interface Muscle (CoreDataGeneratedAccessors)
 
 - (void)addExercisesObject:(Exercise *)value;
 - (void)removeExercisesObject:(Exercise *)value;

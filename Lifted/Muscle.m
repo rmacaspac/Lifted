@@ -1,18 +1,18 @@
 //
-//  Sets.m
+//  Muscle.m
 //  Lifted
 //
 //  Created by Ryan Macaspac on 6/19/14.
 //  Copyright (c) 2014 Ryan Macaspac. All rights reserved.
 //
 
-#import "Sets.h"
+#import "Muscle.h"
 #import "Exercise.h"
 
 
-@implementation Sets
+@implementation Muscle
 
-@dynamic repsAndWeightLifted;
-@dynamic exercise;
+@dynamic name;
+@dynamic exercises;
 
 @end

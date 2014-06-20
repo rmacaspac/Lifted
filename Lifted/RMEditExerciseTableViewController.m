@@ -37,14 +37,14 @@
     // Initial Setup
     self.view.backgroundColor = [UIColor colorWithRed:242/255.0 green:242/255.0 blue:242/255.0 alpha:1.0];
 
-    
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     
-    self.exerciseNameLabel.text = [self.selectedExercise valueForKey:EXERCISE_NAME];
+    self.exerciseNameLabel.text = [self.selectedExercise valueForKey:@"name"];
+    self.targetedMuscleLabel.text = [[self.muscle valueForKey:@"name"] objectAtIndex:0];
     self.numberOfSetsLabel.text = [NSString stringWithFormat:@"%@", [self.selectedExercise valueForKey:EXERCISE_SETS]];
     self.repMinLabel.text = [NSString stringWithFormat:@"%@", [self.selectedExercise valueForKey:EXERCISE_REP_MIN]];
     self.repMaxLabel.text = [NSString stringWithFormat:@"%@", [self.selectedExercise valueForKey:EXERCISE_REP_MAX]];
@@ -119,7 +119,7 @@
 
 - (RMExerciseObject *)newExerciseObject
 {
-    NSDictionary *exerciseDataAsPropertyLists = @{EXERCISE_NAME : self.exerciseNameLabel.text, EXERCISE_SETS : self.numberOfSetsLabel.text, EXERCISE_REP_MIN : self.repMinLabel.text, EXERCISE_REP_MAX : self.repMaxLabel.text};
+    NSDictionary *exerciseDataAsPropertyLists = @{EXERCISE_NAME : self.exerciseNameLabel.text, EXERCISE_MUSCLE_GROUP : [self.selectedExercise valueForKey:@"muscle"], EXERCISE_SETS : self.numberOfSetsLabel.text, EXERCISE_REP_MIN : self.repMinLabel.text, EXERCISE_REP_MAX : self.repMaxLabel.text};
     
     RMExerciseObject *newExerciseObject = [[RMExerciseObject alloc] initWithData:exerciseDataAsPropertyLists];
     

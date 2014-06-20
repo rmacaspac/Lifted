@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "Exercise.h"
+#import "Muscle.h"
 #import "RMExerciseObject.h"
 
 @protocol RMEditExerciseTableViewControllerDelegate <NSObject>
@@ -21,6 +22,7 @@
 @property (weak) id <RMEditExerciseTableViewControllerDelegate> delegate;
 
 @property (strong, nonatomic) RMExerciseObject *selectedExercise;
+@property (strong, nonatomic) Muscle *muscle;
 @property (nonatomic) NSInteger selectedIndexPath;
 
 @end

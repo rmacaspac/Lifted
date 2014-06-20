@@ -19,4 +19,6 @@
 
 @property (weak, nonatomic) id <RMCreateExerciseTableViewControllerDelegate> delegate;
 
+@property (strong, nonatomic) NSMutableArray *muscleGroups;
+
 @end

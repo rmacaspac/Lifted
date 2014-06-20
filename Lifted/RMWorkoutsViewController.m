@@ -82,7 +82,7 @@
         cell.textLabel.text = [self.routineExercises[indexPath.row] valueForKey:@"name"];
         }
     else {
-        cell.textLabel.text = @"Create New Workout";
+        cell.textLabel.text = @"Create Routine";
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
     

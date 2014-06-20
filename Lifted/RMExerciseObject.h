@@ -10,7 +10,8 @@
 
 @interface RMExerciseObject : NSObject
 
-@property (strong, nonatomic) NSString * exerciseName;
+@property (strong, nonatomic) NSString *name;
+@property (strong, nonatomic) NSString *muscle;
 @property (nonatomic) int repMax;
 @property (nonatomic) int repMin;
 @property (nonatomic) int numberOfSets;
