@@ -9,6 +9,7 @@
 #import "RMAppDelegate.h"
 #import "RMHomeViewController.h"
 
+
 @implementation RMAppDelegate
 
 @synthesize managedObjectContext = _managedObjectContext;
@@ -18,6 +19,12 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
+    
+    [[UINavigationBar appearance] setBarTintColor:[UIColor colorWithRed:153/255.0 green:10/255.0 blue:10/255.0 alpha:1.0]];
+    [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
+    [[UINavigationBar appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor], NSFontAttributeName : [UIFont fontWithName:@"TrebuchetMS" size:17.0]}];
+    [[UIBarButtonItem appearanceWhenContainedIn:[UINavigationController class], nil] setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor], NSFontAttributeName : [UIFont fontWithName:@"TrebuchetMS" size:15.0]}forState:UIControlStateNormal];
+    
     return YES;
 }
 							

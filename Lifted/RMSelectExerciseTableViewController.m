@@ -85,13 +85,13 @@
     
     
     if (indexPath.section == 0) {
-        cell.textLabel.font = [UIFont fontWithName:@"Arial Hebrew" size:14.0];
+        cell.textLabel.font = [UIFont fontWithName:@"TrebuchetMS" size:14.0];
         cell.textLabel.text = [[RMExercisesData muscleType] objectAtIndex:self.selectedIndexPath.row + 1];;
     } else if (indexPath.section == 1) {
-        cell.textLabel.font = [UIFont fontWithName:@"Arial Hebrew" size:14.0];
+        cell.textLabel.font = [UIFont fontWithName:@"TrebuchetMS" size:14.0];
         cell.textLabel.text = [self selectMuscleGroup][indexPath.row];
     } else if (indexPath.section == 2) {
-        cell.textLabel.font = [UIFont fontWithName:@"Arial Hebrew" size:14.0];
+        cell.textLabel.font = [UIFont fontWithName:@"TrebuchetMS" size:14.0];
         cell.textLabel.text = [self.exerciseData valueForKey:@"name"][indexPath.row];
     }
     
@@ -214,12 +214,12 @@
     
     if (section == 0) {
         myLabel.frame = CGRectMake(18, 31, 320, 20);
-        myLabel.font = [UIFont fontWithName:@"Arial Hebrew" size:14.0];
+        myLabel.font = [UIFont fontWithName:@"TrebuchetMS" size:14.0];
         myLabel.textColor = [UIColor blackColor];
         myLabel.text = [self tableView:tableView titleForHeaderInSection:section];
     } else if (section == 2) {
         myLabel.frame = CGRectMake(18, 15, 320, 20);
-        myLabel.font = [UIFont fontWithName:@"Arial Hebrew" size:14.0];
+        myLabel.font = [UIFont fontWithName:@"TrebuchetMS" size:14.0];
         myLabel.textColor = [UIColor blackColor];
         myLabel.text = [self tableView:tableView titleForHeaderInSection:section];
     }

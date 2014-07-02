@@ -47,7 +47,7 @@
     self.routineNameTextField = [[UITextField alloc] init];
     self.routineNameTextField.delegate = self;
     self.routineNameTextField.frame = CGRectMake(20, 2, 280, 40);
-    self.routineNameTextField.font = [UIFont fontWithName:@"Arial Hebrew" size:14.0];
+    self.routineNameTextField.font = [UIFont fontWithName:@"TrebuchetMS" size:14.0];
     self.routineNameTextField.placeholder = @"Example: Chest/Triceps";
     self.routineNameTextField.enablesReturnKeyAutomatically = YES;
     self.routineNameTextField.returnKeyType = UIReturnKeyDone;
@@ -99,12 +99,12 @@
     if (indexPath.section == 0) {
         [cell.contentView addSubview:self.routineNameTextField];
     } else if (![self.exerciseData count] && indexPath.section == 1){
-        cell.textLabel.font = [UIFont fontWithName:@"Arial Hebrew" size:14.0];
+        cell.textLabel.font = [UIFont fontWithName:@"TrebuchetMS" size:14.0];
         cell.textLabel.text = @"Add Exercise";
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     } else if ([self.exerciseData count] > 0 && indexPath.section == 2) {
         RMExerciseObject *selectedExercise = self.exerciseData[indexPath.row];
-        cell.textLabel.font = [UIFont fontWithName:@"Arial Hebrew" size:14.0];
+        cell.textLabel.font = [UIFont fontWithName:@"TrebuchetMS" size:14.0];
         cell.textLabel.text = [selectedExercise valueForKey:@"name"];
         cell.accessoryType = UITableViewCellAccessoryNone;
     }
@@ -174,12 +174,12 @@
     
     if (section == 0) {
         myLabel.frame = CGRectMake(18, 31, 320, 20);
-        myLabel.font = [UIFont fontWithName:@"Arial Hebrew" size:14.0];
+        myLabel.font = [UIFont fontWithName:@"TrebuchetMS" size:14.0];
         myLabel.textColor = [UIColor blackColor];
         myLabel.text = [self tableView:tableView titleForHeaderInSection:section];
     } else if (section == 1) {
         myLabel.frame = CGRectMake(18, 15, 320, 20);
-        myLabel.font = [UIFont fontWithName:@"Arial Hebrew" size:14.0];
+        myLabel.font = [UIFont fontWithName:@"TrebuchetMS" size:14.0];
         myLabel.textColor = [UIColor blackColor];
         myLabel.text = [self tableView:tableView titleForHeaderInSection:section];
     }

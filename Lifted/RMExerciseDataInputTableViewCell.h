@@ -18,7 +18,9 @@
 
 @interface RMExerciseDataInputTableViewCell : UITableViewCell <UITextFieldDelegate>
 
+@property (strong, nonatomic) IBOutlet UILabel *previousRepsLabel;
 @property (strong, nonatomic) IBOutlet UILabel *previousWeightLabel;
+@property (strong, nonatomic) IBOutlet UILabel *setNumberLabel;
 @property (strong, nonatomic) IBOutlet UITextField *numberOfRepsTextField;
 @property (strong, nonatomic) IBOutlet UITextField *weightTextField;
 

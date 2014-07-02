@@ -59,7 +59,7 @@
     self.exerciseNameTextField = [[UITextField alloc] init];
     self.exerciseNameTextField.delegate = self;
     self.exerciseNameTextField.frame = CGRectMake(20, 2, 280, 40);
-    self.exerciseNameTextField.font = [UIFont fontWithName:@"Arial Hebrew" size:14.0];
+    self.exerciseNameTextField.font = [UIFont fontWithName:@"TrebuchetMS" size:14.0];
     self.exerciseNameTextField.placeholder = @"Example: Chest";
     self.exerciseNameTextField.enablesReturnKeyAutomatically = YES;
     self.exerciseNameTextField.returnKeyType = UIReturnKeyDone;
@@ -67,17 +67,17 @@
     // Label Setup
     self.numberOfSetsLabel = [[UILabel alloc] init];
     self.numberOfSetsLabel.frame = CGRectMake(70, 12, 120, 21);
-    self.numberOfSetsLabel.font = [UIFont fontWithName:@"Arial Hebrew" size:14.0];
+    self.numberOfSetsLabel.font = [UIFont fontWithName:@"TrebuchetMS" size:14.0];
     self.numberOfSetsLabel.text = [NSString stringWithFormat:@"%i", 4];
     
     self.repMinLabel = [[UILabel alloc] init];
     self.repMinLabel.frame = CGRectMake(70, 12, 120, 21);
-    self.repMinLabel.font = [UIFont fontWithName:@"Arial Hebrew" size:14.0];
+    self.repMinLabel.font = [UIFont fontWithName:@"TrebuchetMS" size:14.0];
     self.repMinLabel.text = [NSString stringWithFormat:@"%i", 6];
     
     self.repMaxLabel = [[UILabel alloc] init];
     self.repMaxLabel.frame = CGRectMake(70, 12, 120, 21);
-    self.repMaxLabel.font = [UIFont fontWithName:@"Arial Hebrew" size:14.0];
+    self.repMaxLabel.font = [UIFont fontWithName:@"TrebuchetMS" size:14.0];
     self.repMaxLabel.text = [NSString stringWithFormat:@"%i", 10];
 }
 
@@ -162,11 +162,12 @@
   
     self.stepper = [[UIStepper alloc] init];
     self.stepper.frame = CGRectMake(206, 6, 94, 29);
+    self.stepper.tintColor = [UIColor colorWithRed:153/255.0 green:10/255.0 blue:10/255.0 alpha:1.0];
     
     if (indexPath.section == 0) {
         [cell.contentView addSubview:self.exerciseNameTextField];
     } else if (indexPath.section == 1) {
-        cell.textLabel.font = [UIFont fontWithName:@"Arial Hebrew" size:14.0];
+        cell.textLabel.font = [UIFont fontWithName:@"TrebuchetMS" size:14.0];
         if (!self.showAllMuscles) {
             cell.textLabel.text = [self.muscleGroups objectAtIndex:self.selectedIndexPath.row];
         } else {
@@ -175,7 +176,7 @@
     } else if (indexPath.section == 2) {
         UILabel *setsLabel = [[UILabel alloc] init];
         setsLabel.frame = CGRectMake(20, 12, 120, 21);
-        setsLabel.font = [UIFont fontWithName:@"Arial Hebrew" size:14.0];
+        setsLabel.font = [UIFont fontWithName:@"TrebuchetMS" size:14.0];
         setsLabel.text = @"Sets";
         
         [cell.contentView addSubview:setsLabel];
@@ -186,7 +187,7 @@
         if (indexPath.row == 1) {
             UILabel *minLabel = [[UILabel alloc] init];
             minLabel.frame = CGRectMake(20, 12, 120, 21);
-            minLabel.font = [UIFont fontWithName:@"Arial Hebrew" size:14.0];
+            minLabel.font = [UIFont fontWithName:@"TrebuchetMS" size:14.0];
             minLabel.text = @"Min:";
             
             [cell.contentView addSubview:minLabel];
@@ -196,7 +197,7 @@
         } else {
             UILabel *maxLabel = [[UILabel alloc] init];
             maxLabel.frame = CGRectMake(20, 12, 120, 21);
-            maxLabel.font = [UIFont fontWithName:@"Arial Hebrew" size:14.0];
+            maxLabel.font = [UIFont fontWithName:@"TrebuchetMS" size:14.0];
             maxLabel.text = @"Max:";
             
             [cell.contentView addSubview:maxLabel];
@@ -287,12 +288,12 @@
     
     if (section == 0) {
         myLabel.frame = CGRectMake(18, 31, 320, 20);
-        myLabel.font = [UIFont fontWithName:@"Arial Hebrew" size:14.0];
+        myLabel.font = [UIFont fontWithName:@"TrebuchetMS" size:14.0];
         myLabel.textColor = [UIColor blackColor];
         myLabel.text = [self tableView:tableView titleForHeaderInSection:section];
     } else {
         myLabel.frame = CGRectMake(18, 15, 320, 20);
-        myLabel.font = [UIFont fontWithName:@"Arial Hebrew" size:14.0];
+        myLabel.font = [UIFont fontWithName:@"TrebuchetMS" size:14.0];
         myLabel.textColor = [UIColor blackColor];
         myLabel.text = [self tableView:tableView titleForHeaderInSection:section];
     }

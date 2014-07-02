@@ -80,10 +80,10 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
     
     if (indexPath.section == 0) {
-        cell.textLabel.font = [UIFont fontWithName:@"Arial Hebrew" size:14.0];
+        cell.textLabel.font = [UIFont fontWithName:@"TrebuchetMS" size:14.0];
         cell.textLabel.text = self.muscleGroupName;
     } else if (indexPath.section == 1) {
-        cell.textLabel.font = [UIFont fontWithName:@"Arial Hebrew" size:14.0];
+        cell.textLabel.font = [UIFont fontWithName:@"TrebuchetMS" size:14.0];
         cell.textLabel.text = [self.exercises valueForKey:@"name"][indexPath.row];
     }
     return cell;
@@ -127,12 +127,12 @@
     
     if (section == 0) {
         myLabel.frame = CGRectMake(18, 31, 320, 20);
-        myLabel.font = [UIFont fontWithName:@"Arial Hebrew" size:14.0];
+        myLabel.font = [UIFont fontWithName:@"TrebuchetMS" size:14.0];
         myLabel.textColor = [UIColor blackColor];
         myLabel.text = [self tableView:tableView titleForHeaderInSection:section];
     } else if (section == 1) {
         myLabel.frame = CGRectMake(18, 15, 320, 20);
-        myLabel.font = [UIFont fontWithName:@"Arial Hebrew" size:14.0];
+        myLabel.font = [UIFont fontWithName:@"TrebuchetMS" size:14.0];
         myLabel.textColor = [UIColor blackColor];
         myLabel.text = [self tableView:tableView titleForHeaderInSection:section];
     }

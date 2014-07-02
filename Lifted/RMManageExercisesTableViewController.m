@@ -68,10 +68,10 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
     
     if (indexPath.section == 0) {
-        cell.textLabel.font = [UIFont fontWithName:@"Arial Hebrew" size:14.0];
+        cell.textLabel.font = [UIFont fontWithName:@"TrebuchetMS" size:14.0];
         cell.textLabel.text = @"Create New Exercise";
     } else if (indexPath.section == 1) {
-        cell.textLabel.font = [UIFont fontWithName:@"Arial Hebrew" size:14.0];
+        cell.textLabel.font = [UIFont fontWithName:@"TrebuchetMS" size:14.0];
         cell.textLabel.text = self.muscleGroups[indexPath.row];
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
@@ -133,7 +133,7 @@
     
     if (section == 1) {
         myLabel.frame = CGRectMake(18, 14, 320, 20);
-        myLabel.font = [UIFont fontWithName:@"Arial Hebrew" size:14.0];
+        myLabel.font = [UIFont fontWithName:@"TrebuchetMS" size:14.0];
         myLabel.textColor = [UIColor blackColor];
         myLabel.text = [self tableView:tableView titleForHeaderInSection:section];
     }

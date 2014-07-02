@@ -57,10 +57,28 @@
     self.repMaxLabel.text = [NSString stringWithFormat:@"%@",[self.selectedExercise valueForKey:EXERCISE_REP_MAX]];
     self.view.backgroundColor = [UIColor colorWithRed:242/255.0 green:242/255.0 blue:242/255.0 alpha:1.0];
     self.workoutTableView.backgroundColor = [UIColor colorWithRed:242/255.0 green:242/255.0 blue:242/255.0 alpha:1.0];
-
-
     
-    NSLog(@"selected exercise data is %@", self.selectedExercise);
+    UILabel *setLabel = [[UILabel alloc] init];
+    setLabel.frame = CGRectMake(20, 157, 41, 13);
+    setLabel.font = [UIFont fontWithName:@"TrebuchetMS" size:12.0];
+    setLabel.textColor = [UIColor blackColor];
+    setLabel.text = @"Set";
+    
+    UILabel *repsLabel = [[UILabel alloc] init];
+    repsLabel.frame = CGRectMake(120, 157, 41, 13);
+    repsLabel.font = [UIFont fontWithName:@"TrebuchetMS" size:12.0];
+    repsLabel.textColor = [UIColor blackColor];
+    repsLabel.text = @"Reps";
+    
+    UILabel *weightLabel = [[UILabel alloc] init];
+    weightLabel.frame = CGRectMake(257, 157, 38, 13);
+    weightLabel.font = [UIFont fontWithName:@"TrebuchetMS" size:12.0];
+    weightLabel.textColor = [UIColor blackColor];
+    weightLabel.text = @"Weight";
+    
+    [self.view addSubview:setLabel];
+    [self.view addSubview:repsLabel];
+    [self.view addSubview:weightLabel];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -144,12 +162,16 @@
     
     if (indexPath.section == 0 && [self.workoutData count] > 0) {
         
-        NSString *repNumber = [[[[self.workoutData valueForKey:@"repsAndWeightLifted"] objectAtIndex:0] objectAtIndex:indexPath.row] objectAtIndex:0];
-        NSString *weightNumber = [[[[self.workoutData valueForKey:@"repsAndWeightLifted"] objectAtIndex:0] objectAtIndex:indexPath.row] objectAtIndex:1];
-        cell.previousWeightLabel.text = [NSString stringWithFormat:@"%@ x %@", repNumber, weightNumber];
+//        for (int i = 0 ; i < [[self.selectedExercise valueForKey:EXERCISE_SETS] intValue]; i++) {
+//            NSString *rowNumber = [NSString stringWithFormat:@"%i", i];
+//            cell.setNumberLabel.text = rowNumber[indexPath.row];
+//        }
+        
+        cell.previousRepsLabel.text = [[[[self.workoutData valueForKey:@"repsAndWeightLifted"] objectAtIndex:0] objectAtIndex:indexPath.row] objectAtIndex:0];
+        cell.previousWeightLabel.text = [[[[self.workoutData valueForKey:@"repsAndWeightLifted"] objectAtIndex:0] objectAtIndex:indexPath.row] objectAtIndex:1];
 
     } else if (indexPath.section == 1) {
-        cell.textLabel.font = [UIFont fontWithName:@"Arial Hebrew" size:14.0];
+        cell.textLabel.font = [UIFont fontWithName:@"TrebuchetMS" size:14.0];
         cell.textLabel.text = @"Add Set";
     }
     
@@ -195,8 +217,9 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 40.0;
+    return 65.0;
 }
+
 
 #pragma mark - RMExerciseDataInputTableViewCell Delegate
 
