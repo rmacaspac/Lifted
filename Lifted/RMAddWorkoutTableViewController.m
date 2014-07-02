@@ -98,14 +98,14 @@
     
     if (indexPath.section == 0) {
         [cell.contentView addSubview:self.routineNameTextField];
-    } else if ([self.exerciseData count] > 0 && indexPath.section == 2) {
-        RMExerciseObject *selectedExercise = self.exerciseData[indexPath.row];
-        cell.textLabel.font = [UIFont fontWithName:@"Arial Hebrew" size:14.0];
-        cell.textLabel.text = [selectedExercise valueForKey:@"exerciseName"];
-        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     } else if (![self.exerciseData count] && indexPath.section == 1){
         cell.textLabel.font = [UIFont fontWithName:@"Arial Hebrew" size:14.0];
         cell.textLabel.text = @"Add Exercise";
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    } else if ([self.exerciseData count] > 0 && indexPath.section == 2) {
+        RMExerciseObject *selectedExercise = self.exerciseData[indexPath.row];
+        cell.textLabel.font = [UIFont fontWithName:@"Arial Hebrew" size:14.0];
+        cell.textLabel.text = [selectedExercise valueForKey:@"name"];
         cell.accessoryType = UITableViewCellAccessoryNone;
     }
     

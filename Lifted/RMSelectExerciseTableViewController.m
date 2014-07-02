@@ -9,8 +9,9 @@
 #import "RMSelectExerciseTableViewController.h"
 #import "RMCreateExerciseTableViewController.h"
 #import "RMExercisesData.h"
+#import "RMCoreDataHelper.h"
 
-@interface RMSelectExerciseTableViewController () <UITableViewDataSource, UITableViewDelegate, RMCreateExerciseTableViewControllerDelegate>
+@interface RMSelectExerciseTableViewController () <UITableViewDataSource, UITableViewDelegate>
 
 @property (strong, nonatomic) IBOutlet UITableView *exercisesTableView;
 @property (strong, nonatomic) IBOutlet UITableView *exerciseTypeTableView;
@@ -18,6 +19,7 @@
 @property (strong, nonatomic) NSMutableArray *targetMuscleData;
 @property (strong, nonatomic) NSMutableArray *exerciseData;
 @property (strong, nonatomic) NSIndexPath *selectedIndexPath;
+@property (strong, nonatomic) NSString *muscleName;
 @property (nonatomic) BOOL showAllMuscles;
 @property (nonatomic) BOOL showAllExercises;
 
@@ -62,11 +64,6 @@
     self.showAllExercises = NO;
     self.selectedIndexPath = 0;
     
-    // Enumerating through exerciseList in RMExercisesData for dictionary objects
-    for (NSMutableDictionary *exercise in [RMExercisesData exerciseList]) {
-        RMExerciseObject *exerciseObjects = [[RMExerciseObject alloc] initWithData:exercise];
-        [self.exerciseData addObject:exerciseObjects];
-    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -74,17 +71,6 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-#pragma mark - Navigation
-
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    if ([segue.destinationViewController isKindOfClass:[RMCreateExerciseTableViewController class]]) {
-        RMCreateExerciseTableViewController *createExerciseVC = segue.destinationViewController;
-        createExerciseVC.delegate = self;
-    }
-}
-
 
 #pragma mark - UITableView Data Source
 
@@ -96,6 +82,8 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
     }
     
+    
+    
     if (indexPath.section == 0) {
         cell.textLabel.font = [UIFont fontWithName:@"Arial Hebrew" size:14.0];
         cell.textLabel.text = [[RMExercisesData muscleType] objectAtIndex:self.selectedIndexPath.row + 1];;
@@ -104,11 +92,7 @@
         cell.textLabel.text = [self selectMuscleGroup][indexPath.row];
     } else if (indexPath.section == 2) {
         cell.textLabel.font = [UIFont fontWithName:@"Arial Hebrew" size:14.0];
-        cell.textLabel.text = @"Create New Exercise";
-        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-    } else if (indexPath.section == 3) {
-        cell.textLabel.font = [UIFont fontWithName:@"Arial Hebrew" size:14.0];
-        cell.textLabel.text = [self.exerciseData valueForKey:EXERCISE_NAME][indexPath.row];
+        cell.textLabel.text = [self.exerciseData valueForKey:@"name"][indexPath.row];
     }
     
     return cell;
@@ -126,8 +110,6 @@
             return [[RMExercisesData muscleType] count] - 1;
         }
     } else if (section == 2) {
-        return 1;
-    } else if (section == 3) {
         // Adjusting number of rows in section 1 when showAllSections is changed
         if (!self.showAllExercises) {
             return 0;
@@ -141,7 +123,7 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 4;
+    return 3;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -154,28 +136,41 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.section == 0) {
+        
         // Changing section from showing one cell to multiple cells
         self.showAllMuscles = !self.showAllMuscles;
         [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationFade];
     } else if (indexPath.section == 1) {
-        // Getting the index path for the row selected
+        
+        // Getting the index path and muscle name for the row selected
         self.selectedIndexPath = [self.tableView indexPathForSelectedRow];
+        self.muscleName = [[RMExercisesData muscleType] objectAtIndex:self.selectedIndexPath.row + 1];
+        
+        // Fetching for exercise objects
+        NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"Exercise"];
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"muscle.name == %@", self.muscleName];
+        [fetchRequest setPredicate:predicate];
+        
+        NSError *error = nil;
+        
+        NSArray *fetchedArray = [[RMCoreDataHelper managedObjectContext] executeFetchRequest:fetchRequest error:&error];
+        
+        self.exerciseData = [fetchedArray mutableCopy];
 
+        [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:2] withRowAnimation:UITableViewRowAnimationFade];
+        
         // Expanding or minimizing table view sections based other sections actions
         if (self.showAllExercises == YES) {
             self.showAllMuscles = !self.showAllMuscles;
             [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationFade];
         } else {
             self.showAllExercises = !self.showAllExercises;
-            [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:3] withRowAnimation:UITableViewRowAnimationFade];
+            [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:2] withRowAnimation:UITableViewRowAnimationFade];
             self.showAllMuscles = !self.showAllMuscles;
             [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationFade];
         }
         [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationAutomatic];
     } else if (indexPath.section == 2) {
-        [self performSegueWithIdentifier:@"selectExerciseToCreateExerciseSegue" sender:indexPath];
-        
-    } else if (indexPath.section == 3) {
         RMExerciseObject *exercise = self.exerciseData[indexPath.row];
         [self.delegate didSelectExercise:exercise];
         [self.navigationController popViewControllerAnimated:YES];
@@ -185,8 +180,6 @@
 -(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
     if (section == 0) {
-        return 1;
-    } else if (section == 2) {
         return 1;
     } else {
         return 10;
@@ -235,15 +228,6 @@
     [headerView addSubview:myLabel];
     
     return headerView;
-}
-
-#pragma mark - UICreateWorkout Delegate
-
-- (void)didCreateWorkout:(RMExerciseObject *)exerciseObject
-{
-    [self.exerciseData insertObject:exerciseObject atIndex:0];
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:3];
-    [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationRight];
 }
 
 #pragma mark - Helper Methods
